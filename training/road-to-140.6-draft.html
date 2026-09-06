@@ -1,0 +1,311 @@
+<title>Road to 140.6</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f3f4f1; --surface:#ffffff; --ink:#16211f; --muted:#5f6a67; --line:#d5dad6;
+  --accent:#0e6b72; --accent-ink:#ffffff; --accent-soft:#dcecec;
+  --clay:#b4552a; --clay-soft:#f4e3da;
+  --swim:#2f7da8; --bike:#b4552a; --run:#3e8a5a;
+  --good:#3e8a5a; --warn:#c48a1c; --bad:#b53a2c;
+  --display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
+  --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101715; --surface:#18211f; --ink:#e6ebe8; --muted:#9aa5a1; --line:#2c3835;
+    --accent:#4fb3b8; --accent-ink:#0b1413; --accent-soft:#173437;
+    --clay:#e07a48; --clay-soft:#3a2418;
+    --swim:#5aa6d0; --bike:#e07a48; --run:#62b57e;
+    --good:#62b57e; --warn:#d9a441; --bad:#e0604f;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101715; --surface:#18211f; --ink:#e6ebe8; --muted:#9aa5a1; --line:#2c3835;
+  --accent:#4fb3b8; --accent-ink:#0b1413; --accent-soft:#173437;
+  --clay:#e07a48; --clay-soft:#3a2418;
+  --swim:#5aa6d0; --bike:#e07a48; --run:#62b57e;
+  --good:#62b57e; --warn:#d9a441; --bad:#e0604f;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+main{max-width:920px;margin:0 auto;padding:40px 24px 80px}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.05;margin:0;text-wrap:balance;letter-spacing:.005em}
+h1{font-size:clamp(44px,8vw,76px);text-transform:uppercase}
+h2{font-size:32px;margin-top:56px;margin-bottom:6px}
+h3{font-size:22px;margin-top:22px}
+p{max-width:66ch;margin:10px 0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:18px;color:var(--muted);max-width:60ch}
+.mast{display:grid;grid-template-columns:1fr;gap:20px;padding-bottom:28px;border-bottom:2px solid var(--ink)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.fact{border-top:2px solid var(--ink);padding-top:8px}
+.fact b{display:block;font-family:var(--display);font-size:30px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.fact span{font-size:13px;color:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin-top:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.scroll{overflow-x:auto}
+.sport{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:middle}
+.swim{background:var(--swim)}.bike{background:var(--bike)}.run{background:var(--run)}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:3px;letter-spacing:.04em;white-space:nowrap}
+.pill.bad{background:var(--clay-soft);color:var(--bad)}
+.pill.warn{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.pill.good{background:color-mix(in srgb,var(--good) 18%,transparent);color:var(--good)}
+.callout{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;margin:20px 0;max-width:72ch}
+.callout p{margin:4px 0}
+figure{margin:20px 0 0}
+figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+svg text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+svg text.lbl{font-family:var(--display);font-size:15px;fill:var(--ink);font-weight:600}
+svg text.ev{fill:var(--ink);font-size:10.5px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.opt{background:var(--surface);border:1px solid var(--line);padding:18px 18px 16px;display:flex;flex-direction:column;gap:8px}
+.opt.pick{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.opt h3{margin:0;font-size:24px}
+.opt .when{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.opt .odds{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);font-family:var(--display);font-size:20px}
+.opt ul{margin:4px 0 0;padding-left:18px;font-size:14px}
+.opt li{margin:3px 0}
+.rules{counter-reset:r;padding:0;margin:14px 0 0;list-style:none;max-width:72ch}
+.rules li{position:relative;padding:10px 0 10px 54px;border-bottom:1px solid var(--line)}
+.rules li::before{counter-increment:r;content:counter(r,decimal-leading-zero);position:absolute;left:0;top:8px;font-family:var(--display);font-size:24px;color:var(--accent);font-weight:600}
+.light{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:-1px;margin-right:6px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:16px}
+.day{background:var(--surface);border:1px solid var(--line);padding:10px;font-size:13px;min-height:150px;border-top:4px solid var(--line)}
+.day.s{border-top-color:var(--swim)}.day.b{border-top-color:var(--bike)}.day.r{border-top-color:var(--run)}
+.day b{font-family:var(--display);font-size:18px;display:block;margin-bottom:4px}
+.day .t{font-family:var(--mono);font-size:11px;color:var(--muted);display:block;margin-bottom:6px}
+.plumb td:first-child{font-weight:600}
+footer{margin-top:60px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+footer a{color:var(--accent)}
+@media (max-width:760px){
+  .facts{grid-template-columns:1fr 1fr}
+  .opts{grid-template-columns:1fr}
+  .week{grid-template-columns:repeat(2,1fr)}
+}
+@media (prefers-reduced-motion:no-preference){ .opt{transition:transform .15s} }
+</style>
+
+<main>
+  <header class="mast">
+    <div>
+      <div class="eyebrow">Burke Ruder · Buda, Texas · written Sep 6, 2026</div>
+      <h1>Road to 140.6</h1>
+      <p class="lede">From a cutoff-scraping 70.3 in Waco to a full Ironman, around three kids, two jobs, and a Kickr in the garage. Three timelines, one baseline goal, and the daily rules that keep it honest.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>10.5 mi/wk</b><span>run volume, last 4 weeks. Only sport currently active.</span></div>
+      <div class="fact"><b>171 bpm</b><span>avg HR on a 3-mile "easy" lunch run in 95°F. Max 187.</span></div>
+      <div class="fact"><b>0 / 0</b><span>swims since May · indoor rides since Sep 2025.</span></div>
+    </div>
+  </header>
+
+  <h2>Where you stand</h2>
+  <p>Everything below is read from Strava, which is already receiving your Garmin Forerunner data (heart rate, run power, cadence). The picture is a runner who is fit enough to grind, with two disciplines currently asleep.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Sport</th><th>Last 4 weeks</th><th>Best evidence on file</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td><span class="sport run"></span>Run</td><td>13 runs, ~42 mi, 3.0–3.5 mi each at 10:30–11:00 /mi. One 5.1 mi on Aug 30.</td><td>11 mi (Apr 2025). 70.3 Waco run 2:55 moving.</td><td><span class="pill warn">Consistent, but every run is a threshold effort</span></td></tr>
+      <tr><td><span class="sport bike"></span>Bike</td><td>Nothing. Last rides: two 20-milers outdoors in Iowa, July.</td><td>RAGBRAI Jul 2025: 77 / 46 / 102 / 76 mi on consecutive days at 13–14 mph.</td><td><span class="pill warn">Durability exists; needs waking up</span></td></tr>
+      <tr><td><span class="sport swim"></span>Swim</td><td>Nothing. One 550 m session in May.</td><td>Sep 2024: 1500–1900 m sessions at ~3:30 /100 m. Waco swim 1:01:45.</td><td><span class="pill bad">The limiter for a full</span></td></tr>
+      <tr><td>Strength</td><td>None.</td><td>2×/week block Dec 2025–Feb 2026.</td><td><span class="pill warn">Bring back 1×/week</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Where a full Ironman is actually won or lost for you</h3>
+  <p>Scale the Waco paces up to 140.6 and the run is survivable, the bike is fine if nothing goes wrong, and the swim is over the cutoff. That ordering sets the priorities for the next ten weeks.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Leg</th><th>2024 pace</th><th>Scaled to full</th><th>Cutoff</th><th>Need on race day</th></tr></thead>
+    <tbody>
+      <tr><td><span class="sport swim"></span>2.4 mi swim</td><td class="num">~3:30 /100 m</td><td class="num">2:15–2:25</td><td class="num">2:20</td><td>2:45–3:00 /100 m → about 1:50. Two or three swims a week, no exceptions.</td></tr>
+      <tr><td><span class="sport bike"></span>112 mi bike</td><td class="num">~14 mph</td><td class="num">~8:00</td><td class="num">10:30 elapsed</td><td>15–16 mph → 7:00–7:30. FTP toward 180–200 W, two rides of 4–5 h done.</td></tr>
+      <tr><td><span class="sport run"></span>26.2 mi run</td><td class="num">~14:00 /mi</td><td class="num">~6:10</td><td class="num">17:00 total</td><td>Run/walk at 13:00–13:30 /mi → under 6:00. Two long runs of 16–18 mi.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout">
+    <p><strong>Zones are wrong right now.</strong> Strava is using an age formula (max 180) but your watch has recorded 187. Until the tests in weeks 2–3, easy runs mean HR 130–150 and rides mean "full sentences". Midday runs in September cannot be easy; they move to before 7am or after 7:30pm.</p>
+  </div>
+
+  <h2>The three timelines</h2>
+  <p>All three share the same first ten weeks and the same first milestone. They differ in how much slack real life gets.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 1130 300" width="100%" role="img" aria-label="Timeline of three race options from September 2026 to April 2028">
+      <!-- month grid: Sep 2026 = x 40, 50px per month, through May 2028 -->
+      <g>
+        <line x1="40" y1="40" x2="40" y2="238" stroke="var(--line)"/>
+        <line x1="240" y1="40" x2="240" y2="238" stroke="var(--line)"/>
+        <line x1="440" y1="40" x2="440" y2="238" stroke="var(--line)"/>
+        <line x1="640" y1="40" x2="640" y2="238" stroke="var(--line)"/>
+        <line x1="840" y1="40" x2="840" y2="238" stroke="var(--line)"/>
+        <line x1="1040" y1="40" x2="1040" y2="238" stroke="var(--line)"/>
+        <text x="40" y="256" text-anchor="middle">Sep 2026</text>
+        <text x="240" y="256" text-anchor="middle">Jan 2027</text>
+        <text x="440" y="256" text-anchor="middle">May 2027</text>
+        <text x="640" y="256" text-anchor="middle">Sep 2027</text>
+        <text x="840" y="256" text-anchor="middle">Jan 2028</text>
+        <text x="1040" y="256" text-anchor="middle">May 2028</text>
+      </g>
+      <!-- shared rebuild block + 70.3-ready milestone -->
+      <rect x="40" y="22" width="120" height="8" fill="var(--accent)" opacity=".35"/>
+      <text x="40" y="16">Rebuild · 10 wk</text>
+      <line x1="215" y1="22" x2="215" y2="238" stroke="var(--accent)" stroke-dasharray="3 3"/>
+      <text x="219" y="16" class="ev">70.3-ready baseline · mid Dec</text>
+
+      <!-- A -->
+      <text x="10" y="76" class="lbl">A</text>
+      <rect x="40" y="62" width="120" height="18" fill="var(--accent)" opacity=".35"/>
+      <rect x="160" y="62" width="100" height="18" fill="var(--accent)" opacity=".55"/>
+      <rect x="260" y="62" width="100" height="18" fill="var(--accent)" opacity=".8"/>
+      <rect x="360" y="62" width="48" height="18" fill="var(--clay)"/>
+      <rect x="408" y="62" width="10" height="18" fill="var(--accent)" opacity=".3"/>
+      <circle cx="418" cy="71" r="6" fill="var(--clay)" stroke="var(--ink)" stroke-width="1.5"/>
+      <text x="430" y="75" class="ev">IM Texas · Apr 17, 2027 · 32 wk</text>
+
+      <!-- B -->
+      <text x="10" y="136" class="lbl">B</text>
+      <rect x="40" y="122" width="120" height="18" fill="var(--accent)" opacity=".35"/>
+      <rect x="160" y="122" width="230" height="18" fill="var(--accent)" opacity=".55"/>
+      <rect x="390" y="122" width="250" height="18" fill="var(--accent)" opacity=".8"/>
+      <rect x="640" y="122" width="100" height="18" fill="var(--clay)"/>
+      <rect x="740" y="122" width="35" height="18" fill="var(--accent)" opacity=".3"/>
+      <circle cx="395" cy="131" r="5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+      <text x="395" y="112" class="ev" text-anchor="middle">70.3 Galveston · Apr 4</text>
+      <circle cx="680" cy="131" r="6" fill="var(--clay)" stroke="var(--ink)" stroke-width="1.5"/>
+      <circle cx="775" cy="131" r="6" fill="var(--clay)" stroke="var(--ink)" stroke-width="1.5"/>
+      <text x="785" y="135" class="ev">Chattanooga (Sep) · Florida / Arizona (Nov) 2027</text>
+
+      <!-- C -->
+      <text x="10" y="196" class="lbl">C</text>
+      <rect x="40" y="182" width="120" height="18" fill="var(--accent)" opacity=".35"/>
+      <rect x="160" y="182" width="560" height="18" fill="var(--accent)" opacity=".55"/>
+      <rect x="720" y="182" width="230" height="18" fill="var(--accent)" opacity=".8"/>
+      <rect x="950" y="182" width="55" height="18" fill="var(--clay)"/>
+      <circle cx="395" cy="191" r="5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+      <circle cx="695" cy="191" r="5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+      <text x="695" y="172" class="ev" text-anchor="middle">70.3 Waco · Oct 2027</text>
+      <circle cx="1010" cy="191" r="6" fill="var(--clay)" stroke="var(--ink)" stroke-width="1.5"/>
+      <text x="1010" y="220" class="ev" text-anchor="end">IM Texas · Apr 2028 · 84 wk</text>
+
+      <!-- legend -->
+      <rect x="40" y="276" width="14" height="8" fill="var(--accent)" opacity=".55"/><text x="60" y="284">base / build (darker = more hours)</text>
+      <rect x="300" y="276" width="14" height="8" fill="var(--clay)"/><text x="320" y="284">peak + taper</text>
+      <circle cx="430" cy="280" r="5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/><text x="442" y="284">half-distance checkpoint</text>
+      <circle cx="680" cy="280" r="5" fill="var(--clay)" stroke="var(--ink)" stroke-width="1.5"/><text x="692" y="284">full Ironman</text>
+    </svg>
+    </div>
+    <figcaption>IM Texas 2027 date is as listed on TriFind; fall 2027 full-distance dates were not all posted at time of writing and use their usual weekends.</figcaption>
+  </figure>
+
+  <div class="opts">
+    <div class="opt">
+      <h3>A · Pushing it</h3>
+      <div class="when">IRONMAN Texas, The Woodlands · April 17, 2027 · 32 weeks</div>
+      <ul>
+        <li>Register now; it sells out. Only full within driving distance.</li>
+        <li>Rebuild 10 wk → Base 8 wk (8–10 h) → Build 8 wk (11–14 h) → Peak 4 wk (15 h) → Taper.</li>
+        <li>5-hour Kickr rides before dawn in March. 17-mile long runs.</li>
+        <li>Needs ~90% of sessions done. One sick-kid week is survivable; three are not.</li>
+        <li>Skip Galveston 70.3; too close to race day.</li>
+      </ul>
+      <div class="odds">~40% healthy finish</div>
+    </div>
+    <div class="opt pick">
+      <h3>B · Recommended</h3>
+      <div class="when">A fall 2027 full · 55–62 weeks</div>
+      <ul>
+        <li>Chattanooga (late Sep, downstream swim) if the swim stays the weak link; Arizona (mid Nov, flat, cool) as the classic first-timer race; Florida (early Nov) as the flat backup.</li>
+        <li>70.3 Galveston, April 4, 2027 as a full-dress rehearsal.</li>
+        <li>Winter base 8–10 h → summer build 11–13 h, all early → peak 13–14 h in Sep/Oct.</li>
+        <li>Enough slack for a real family and two jobs.</li>
+        <li>Choose the race by Oct 15, 2026 when registration opens.</li>
+      </ul>
+      <div class="odds">~75% healthy finish</div>
+    </div>
+    <div class="opt">
+      <h3>C · Dragging feet</h3>
+      <div class="when">IRONMAN Texas · April 2028 · 84 weeks</div>
+      <ul>
+        <li>2027 is the year of halves: Galveston (Apr), Waco (Oct). Full build starts Nov 2027.</li>
+        <li>Peak weeks never pass 12 h.</li>
+        <li>Most compatible with an 18-month-old becoming a 3-year-old.</li>
+        <li>Risk is boredom, not injury. Race the halves properly to stay hungry.</li>
+      </ul>
+      <div class="odds">~85% healthy finish</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>The baseline goal comes first, on every timeline.</strong> "70.3-ready on 30 days' notice" is reached by mid-December 2026 and means, in one normal week: swim 2000 m continuous, ride 3 hours at Z2, run 10 miles, at 7–8 hours total without digging a hole. From there, a half with four weeks' notice is a taper, not a project.</p>
+    <p>Register for Galveston 70.3 (April 4, 2027) now regardless of A, B, or C.</p>
+  </div>
+
+  <h2>Week one</h2>
+  <p>Rebuild week 1 of 10. Target 5.5 hours. Built around Labor Day Monday, your open lunch slots Tuesday and Friday, and the 5:15am garage window everything else lives in.</p>
+  <div class="week">
+    <div class="day s"><b>Mon 9/7</b><span class="t">holiday · any time · 30 min</span>Swim. 8×50 easy, 4×100, 200 straight, 4×50. ~1100 m. Check pool hours and winter season.</div>
+    <div class="day b"><b>Tue 9/8</b><span class="t">5:15am · 45 min</span>Kickr on Zwift, Z2. Last 10 min comfortably hard. Confirm Zwift → Strava first.</div>
+    <div class="day r"><b>Wed 9/9</b><span class="t">before 7am · 40 min</span>Easy run. HR cap 150. Walk when it drifts. It will feel slow.</div>
+    <div class="day b"><b>Thu 9/10</b><span class="t">5:15am · 45 + 20 min</span>Kickr with 3×5 min tempo, 2 min easy between. Then 20 min strength.</div>
+    <div class="day s"><b>Fri 9/11</b><span class="t">lunch · 30 min</span>Swim. Same set, continuous piece grows to 250 m.</div>
+    <div class="day b"><b>Sat 9/12</b><span class="t">5:00am · 75 + 10 min</span>Long Kickr, Z2, carbs in the bottle. Then 10 min jog straight off the bike.</div>
+    <div class="day r"><b>Sun 9/13</b><span class="t">6:30am · 50 min</span>Easy run, or rest if the week was rough.</div>
+  </div>
+
+  <h2>Rebuild block template · weeks 1–10</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Day</th><th>Session</th><th>Slot</th><th>Progression</th></tr></thead>
+    <tbody>
+      <tr><td>Mon</td><td><span class="sport swim"></span>Swim 30–40 min, technique</td><td>lunch / 8pm</td><td>Continuous piece +25 m every session</td></tr>
+      <tr><td>Tue</td><td><span class="sport bike"></span>Kickr 45–60 min Z2</td><td>5:15am</td><td>+5 min per week</td></tr>
+      <tr><td>Wed</td><td><span class="sport run"></span>Run 40–50 min easy</td><td>before 7am</td><td>Hold pace, watch HR fall</td></tr>
+      <tr><td>Thu</td><td><span class="sport bike"></span>Kickr 45 min w/ tempo + 20 min strength</td><td>5:15am</td><td>3×5 → 3×8 min tempo</td></tr>
+      <tr><td>Fri</td><td><span class="sport swim"></span>Swim 30–40 min</td><td>lunch / 8pm</td><td>Same as Mon</td></tr>
+      <tr><td>Sat</td><td><span class="sport bike"></span>Long ride 75 → 180 min + brick jog</td><td>5:00am</td><td>+15 min per week; 60 g carbs/hr</td></tr>
+      <tr><td>Sun</td><td><span class="sport run"></span>Long run 50 → 90 min</td><td>6:30am</td><td>Run/walk allowed. Every 3rd week: rest</td></tr>
+    </tbody>
+  </table></div>
+  <p>Weekly hours: 5.5 · 6 · 6.5 · <strong>4.5</strong> · 7 · 7.5 · 8 · <strong>5.5</strong> · 8 · 8.5. Bold weeks are deliberate down-weeks. Tests in weeks 2–3: 20-minute FTP on Zwift, 30-minute run for lactate-threshold heart rate, 400 m swim time trial. Re-test every 8 weeks.</p>
+
+  <h2>Daily adjustment rules</h2>
+  <p>Each morning, say "today" with your Oura readiness, sleep hours, and Garmin Training Readiness. Strava and your calendars are read automatically. The answer is one session that fits a real gap in the day.</p>
+  <ol class="rules">
+    <li><span class="light" style="background:var(--good)"></span><strong>Green</strong> (Oura ≥ 75, sleep ≥ 6.5 h, Garmin ≥ 50): do the planned session.</li>
+    <li><span class="light" style="background:var(--warn)"></span><strong>Yellow</strong> (Oura 60–74, or sleep 5–6.5 h, or Garmin 25–49): keep the session, drop to Z2, cap at 45 min. No tests on yellow days.</li>
+    <li><span class="light" style="background:var(--bad)"></span><strong>Red</strong> (Oura under 60, sleep under 5 h, Garmin under 25, resting HR 7+ over baseline, or a night up with a kid): 20-minute walk or rest. Nothing is made up tomorrow; the week just gets smaller.</li>
+    <li><strong>Calendar collision:</strong> move the session to another open slot the same day (5am, lunch, 8pm) before moving it to another day. Keep one rest day. Never stack long ride and long run back to back in the rebuild block.</li>
+    <li><strong>Missed session:</strong> it is gone. Weekly hours never rise more than 10% over last week to compensate.</li>
+    <li><strong>Two yellow or red days in a row:</strong> cut the rest of the week by a third and flag it in the weekly summary.</li>
+    <li><strong>Heat:</strong> any run starting above 85°F is Z1 only or moved.</li>
+    <li><strong>Alcohol the night before:</strong> the day is yellow at best, whatever Oura says.</li>
+  </ol>
+
+  <h2>Alcohol</h2>
+  <p>This is part of the training plan, not a side quest. The ring will show the effect on resting heart rate, HRV, and readiness within two to three weeks, and that trend gets shown back to you every Sunday.</p>
+  <ol class="rules">
+    <li>Zero drinks the night before Saturday and Sunday sessions and before any test.</li>
+    <li>Cap: 3 per week in the rebuild block, 2 in base, 1 or fewer from the build onward. Last six weeks before any race: zero.</li>
+    <li>Dry days are reported in the weekly check-in and tracked next to training hours.</li>
+    <li>A lapse is data, not failure. Two lapses in a week means we talk about the trigger: Friday, a TIG event, bedtime.</li>
+  </ol>
+
+  <h2>What is connected, and what is not</h2>
+  <div class="scroll"><table class="plumb">
+    <thead><tr><th>Source</th><th>Status</th><th>How it reaches the coach</th></tr></thead>
+    <tbody>
+      <tr><td>Garmin Forerunner 970</td><td><span class="pill good">Working</span></td><td>Garmin Connect → Strava. Heart rate, run power, cadence are all visible already.</td></tr>
+      <tr><td>Strava</td><td><span class="pill good">Working</span></td><td>Read directly. Every session, every lap, every HR trace.</td></tr>
+      <tr><td>Zwift + Kickr</td><td><span class="pill warn">Check the link</span></td><td>Zwift → Strava. Ride inside Zwift so power lands in Strava. Your 2024–25 trainer rides arrived with no power or distance, which is the watch's indoor profile, not Zwift.</td></tr>
+      <tr><td>Google Calendar</td><td><span class="pill good">Working</span></td><td>Work calendar as free/busy; TIG calendar readable and writable, so sessions can be placed on it.</td></tr>
+      <tr><td>Oura</td><td><span class="pill bad">No connector</span></td><td>Type readiness, sleep, and HRV in the morning check-in (20 seconds). Or add an Oura personal access token as an environment variable in the Claude Code environment and it gets pulled automatically.</td></tr>
+      <tr><td>Garmin readiness / HRV status</td><td><span class="pill bad">No connector</span></td><td>Type it when it disagrees with Oura. Oura covers sleep and HRV well enough on its own.</td></tr>
+      <tr><td>Renpho scale</td><td><span class="pill bad">No connector</span></td><td>Weigh Monday mornings, type it. Or use Renpho's export-by-email into Gmail, which is connected.</td></tr>
+    </tbody>
+  </table></div>
+
+  <footer>
+    Source of truth lives in the <code>training/</code> folder on the <code>claude/full-ironman-training-rlyifu</code> branch: athlete profile, this plan, and one log file per week. Race dates: <a href="https://www.trifind.com/re_795000/2027IRONMANTexas">IM Texas 2027</a>, <a href="https://www.ahotu.com/event/ironman-70-3-texas">70.3 Texas Galveston 2027</a>, <a href="https://www.ahotu.com/event/ironman-70-3-waco">70.3 Waco</a>.
+  </footer>
+</main>

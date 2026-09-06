@@ -1,0 +1,15 @@
+name = "ironman-training"
+main = "worker/index.js"
+compatibility_date = "2026-09-01"
+
+routes = [
+  { pattern = "ironman.burkeruder.ai/*", zone_name = "burkeruder.ai" }
+]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ironman-training-db"
+database_id = "79f0d6c1-2358-4ddf-97fc-b6bbd2985dab"
+
+[observability]
+enabled = true
