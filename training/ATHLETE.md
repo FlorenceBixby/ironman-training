@@ -52,8 +52,8 @@ Tests to schedule in weeks 2–3 of the rebuild (all at or after 6:30am):
 |---|---|---|
 | Garmin FR970 | Working | Garmin Connect → Strava. HR, run power, cadence all visible. |
 | Zwift / Kickr | Needs check | Zwift → Strava connection. **Ride in Zwift going forward** — old trainer rides recorded via the watch's indoor profile have no power/distance. |
-| Oura | Not connected | Type readiness/sleep/HRV in daily check-in, or add `OURA_TOKEN` env var. |
-| Garmin readiness | Not connected | Type it in check-in when it disagrees with Oura. |
-| Renpho | Not connected | Type weight weekly. Or use Renpho's export-by-email into Gmail. |
-| Calendar | Unresolved | See `README.md` — ask Burke which calendar before writing events anywhere. |
+| Oura | Built, pending Burke's client ID/secret | Full OAuth2 at `im.burkeruder.ai/oauth/start` (`worker/oura.js`). Cron pulls readiness + sleep hours daily once connected. See `HANDOFF.md`. |
+| Garmin readiness | Not connected, by design | Real API needs a business dev relationship; unofficial route needs Burke's actual Garmin password — rejected as a security tradeoff. Type it in check-in when it disagrees with Oura. |
+| Renpho | Not connected, by design | No clean public API. Type weight weekly, or use Renpho's export-by-email into Gmail. |
+| Calendar | Resolved | Primary Google calendar (`burke.ruder@gmail.com`, `primary`), synced daily by a GitHub Action in `burke-portfolio` (`personal-agents/training_calendar_sync.py`). See `README.md`. |
 | Dashboard D1 | Working | `ironman-training-db`, binding `DB`. Schema in `worker/schema.sql`. |

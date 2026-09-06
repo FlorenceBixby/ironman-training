@@ -160,15 +160,16 @@ a{color:var(--accent)}
   <section>
     <h2>This week</h2>
     <p class="eyebrow">${esc(weekRange)}</p>
+    <p>This isn't a fixed schedule set in advance — each row below gets added the morning of, sized to whatever gap actually exists that day against the week's budget (${weekHours ?? "—"} hrs, roughly split across swim/bike/run/strength). A quiet day shrinks the week; it doesn't get "made up" on a specific later day.</p>
     <div class="scroll">
       <table>
         <thead><tr><th>Day</th><th>Sport</th><th>Session</th><th>Slot</th><th>Length</th><th>Status</th></tr></thead>
         <tbody>
-          ${sessions.length ? sessions.map(sessionRow).join("") : `<tr><td colspan="6">No sessions logged for this week yet.</td></tr>`}
+          ${sessions.length ? sessions.map(sessionRow).join("") : `<tr><td colspan="6">No sessions decided yet this week — they're added day by day, not pre-planned.</td></tr>`}
         </tbody>
       </table>
     </div>
-    <div class="callout"><p><span class="rule">Standing rule:</span> nothing starts before 6:30am. Kickr and swim sessions run late-morning, at lunch, or evening — never pre-dawn.</p></div>
+    <div class="callout"><p><span class="rule">Standing rule:</span> nothing starts before 6:30am. Kickr and swim sessions run late-morning, at lunch, or evening — never pre-dawn. <span class="rule">Adaptive by design:</span> a missed low-value session is dropped, not owed; a missed long ride/run compresses into the same week if there's room, or the week just gets smaller — never pinned to a specific make-up day. Doing more than planned shrinks the rest of that week's ask, not next week's.</p></div>
   </section>
 
   <section>
@@ -209,7 +210,8 @@ a{color:var(--accent)}
   </section>
 
   <footer>
-    ironman.burkeruder.ai — Cloudflare Worker + D1. Source of truth: <code>ironman-training</code> repo, <code>training/PLAN.md</code> and <code>training/ATHLETE.md</code>.
+    im.burkeruder.ai — Cloudflare Worker + D1. Source of truth: <code>ironman-training</code> repo, <code>training/PLAN.md</code> and <code>training/ATHLETE.md</code>.
+    &nbsp;·&nbsp; <a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a>
   </footer>
 </main>
 </body>

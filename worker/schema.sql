@@ -52,6 +52,17 @@ CREATE TABLE IF NOT EXISTS milestones (
   sort_order INTEGER DEFAULT 0
 );
 
+-- Oura OAuth2 tokens. Single-user app: exactly one row, id fixed at 1.
+-- refresh_token rotates on every use (Oura issues a new one per refresh and
+-- invalidates the old one) — always overwrite both columns together.
+CREATE TABLE IF NOT EXISTS oura_tokens (
+  id INTEGER PRIMARY KEY CHECK (id = 1),
+  access_token TEXT NOT NULL,
+  refresh_token TEXT NOT NULL,
+  expires_at INTEGER NOT NULL,     -- unix seconds
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
 -- Seed: week 1 (rebuild)
 INSERT OR IGNORE INTO weeks (week_id, start_date, end_date, phase, target_hours, alcohol_cap, notes)
 VALUES ('2026-W37', '2026-09-07', '2026-09-13', 'Rebuild wk 1', 5.5, 3,

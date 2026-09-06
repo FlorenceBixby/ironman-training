@@ -3,6 +3,7 @@ main = "worker/index.js"
 compatibility_date = "2026-09-01"
 
 routes = [
+  { pattern = "im.burkeruder.ai/*", zone_name = "burkeruder.ai" },
   { pattern = "ironman.burkeruder.ai/*", zone_name = "burkeruder.ai" }
 ]
 
@@ -13,3 +14,10 @@ database_id = "79f0d6c1-2358-4ddf-97fc-b6bbd2985dab"
 
 [observability]
 enabled = true
+
+# Daily Oura pull — 12:30 UTC is ~7:30am CT (CDT; drifts an hour on standard
+# time, same caveat as the personal-mailbox-manager GH Action cron). Runs
+# after the ring has synced overnight sleep/readiness, before Burke's
+# "today" check-in.
+[triggers]
+crons = ["30 12 * * *"]

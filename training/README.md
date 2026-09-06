@@ -7,8 +7,9 @@ that coaches should read these files first, then pull live data.
 branch inside `dnd-table` (Sunfield's repo) for one afternoon on 2026-09-06 —
 that was wrong, `dnd-table` is a completely different project. Everything
 Ironman-related lives here now, including the live dashboard at
-`ironman.burkeruder.ai`, which reads from the same D1 database this workspace
-writes to.
+`im.burkeruder.ai` (the old `ironman.burkeruder.ai` still resolves — the
+worker 301-redirects it), which reads from the same D1 database this
+workspace writes to.
 
 ## Standing rule: no workouts before 6:30am. Ever.
 
@@ -30,37 +31,38 @@ every future week, not just the ones already written.
 
 ## Daily protocol ("today")
 
+**As of 2026-09-06 the plan is adaptive, not a fixed weekly grid — see `PLAN.md`'s "How the plan actually works now."** There is no pre-written Monday–Sunday schedule to read a session off of; every day's session is computed fresh from that week's budget, what's been done so far, and today's actual readiness and calendar.
+
 When Burke says "today" (or "plan my day", "what's on", etc.):
 
-1. Read `ATHLETE.md`, `PLAN.md`, and this week's log (create it from the template at the bottom of `PLAN.md` if missing).
-2. Pull Strava: last 7 days of activities (`list_activities`), and `get_activity_performance` on anything since the last check-in to see HR and power.
-3. Pull his calendar for today and tomorrow (see "Which calendar" below).
-4. Ask for (or read from the message) the four readiness numbers: Oura readiness, Oura sleep hours, Garmin Training Readiness, weight if weighed. Missing numbers are fine.
-5. Apply the adjustment rules in `PLAN.md` and give ONE session for today with: what, when (a real gap in the calendar, **never before 6:30am**), how long, intensity target, and the one thing to focus on. Offer a fallback if the day blows up.
+1. Read `ATHLETE.md`, `PLAN.md` (especially "How the plan actually works now"), and this week's log (create it from the template at the bottom of `PLAN.md` if missing, using this week's phase budget).
+2. Pull Strava: last 7 days of activities (`list_activities`), and `get_activity_performance` on anything since the last check-in to see HR and power. Use this to see what's actually been done against the week's budget so far.
+3. Pull his calendar for today and tomorrow (his primary Google calendar, `burke.ruder@gmail.com` — see "Which calendar" below).
+4. Get the four readiness numbers. Oura readiness and sleep hours pull automatically each morning via the OAuth connection (see "Data sources" below) — check today's `checkins` row in D1 first; only ask Burke directly if it's missing (e.g. Oura hasn't synced yet) or if Garmin Training Readiness disagrees and he wants to report it. Weight if he weighed in (Renpho, still manual — see below).
+5. Run the picking logic in `PLAN.md`: readiness color sets the ceiling, the sport furthest behind its weekly minimum with the fewest days left to fit it leads, pick the next item on that sport's menu, fit it to today's actual calendar gap. Give ONE session: what, when (a real gap in the calendar, **never before 6:30am**), how long, intensity target, and the one thing to focus on. Offer a fallback if the day blows up.
 6. Append to this week's log: date, readiness numbers, session prescribed, and (once Strava shows it) session done.
-7. Write the check-in and session to D1 via the dashboard's API (`POST /api/checkin`, `POST /api/session` — see `worker/index.js` in this repo) so the live dashboard stays current. If asked, also put the session on his calendar.
+7. Write the check-in and session to D1 via the dashboard's API (`POST /api/checkin`, `POST /api/session` — see `worker/index.js` in this repo) so the live dashboard stays current. Calendar sync is automatic (see below) — no need to ask or do it by hand.
 
 Keep it short. Burke has three kids and two jobs; the answer to "today" should fit on a phone screen.
 
 ## Weekly protocol (Sunday evening or Monday morning)
 
 1. Summarize last week from Strava: hours, sessions per sport, longest ride, longest run, swim yards, and how HR trended at easy pace.
-2. Compare to the phase target in `PLAN.md`. Adjust next week up or down (never more than +10% hours week over week).
-3. Write next week's log file with the seven planned sessions — all at or after 6:30am.
-4. Note dry days reported and alcohol trend.
+2. Compare to the phase target in `PLAN.md`. Set next week's **budget** (total hours + per-sport minimums — never more than +10% hours over last week's *actual* completed hours, not planned). This is a budget for the daily protocol to draw from, not seven pre-assigned sessions.
+3. Start next week's log file (template at the bottom of `PLAN.md`) with that budget line and an empty daily table — the daily protocol fills each row in as the week happens.
+4. Note dry days reported and alcohol trend. Flag any two-week pattern of a missed high-value session (per `PLAN.md`'s absorption rules) as something worth an actual conversation.
 
 ## Which calendar
 
-There is no single obvious calendar for this. Options on the table, pending Burke's answer:
-1. His actual primary personal calendar (`burke.ruder@gmail.com`).
-2. A new dedicated "Ironman Training" calendar (same account).
-3. The existing private "Family Events" calendar (id in `FAMILY_CALENDAR_ID`, same OAuth token).
+**Resolved 2026-09-06: Burke's actual primary personal calendar** (`burke.ruder@gmail.com`, the account's `primary` calendar — not a new dedicated calendar, and not the private "Family Events" calendar used for kid/family events). Do not default to the TIG calendar (`burke@theinterestinggroup.com`) — that mixes personal fitness into his business calendar.
 
-**Do not default to the TIG calendar** (`burke@theinterestinggroup.com`) — that mixes personal fitness into his business calendar and was only ever a placeholder from a session that had nothing else connected. The working OAuth connection for `burke.ruder@gmail.com` itself lives in the `burke-portfolio` repo at `personal-agents/calendar_agent.py` (see `_get_calendar_service` / `create_event_if_new`) — reuse that pattern, not TIG's.
+**How it's wired:** the `burke-portfolio` repo (`personal-agents/calendar_agent.py`, `_get_calendar_service`) already has a working Calendar-scoped OAuth token for `burke.ruder@gmail.com` (client credentials + refresh token stored as GitHub Actions secrets `GMAIL_CREDENTIALS_PERSONAL` / `GMAIL_TOKEN_PERSONAL` on that repo — see its `.github/workflows/personal-mailbox-manager.yml` for the pattern). A daily scheduled GitHub Action in that repo (`personal-agents/training_calendar_sync.py`, workflow `.github/workflows/training-calendar-sync.yml`) reuses that same token, reads today's session from this dashboard's public `GET /api/dashboard` endpoint, and creates the event on the `primary` calendar (deduplicated by date via the same `extendedProperties.private.source_msg_id` pattern `calendar_agent.py` already uses for the Family Events sync) — so this workspace's Worker never needs its own separate Google OAuth app. Runs after the "today" session for a given day is expected to already be in D1 (mid-morning CT).
 
 ## Data sources
 
 - **Strava** (connected): activities from the Garmin Forerunner 970 (HR, run power, cadence) and Zwift/Kickr rides (power) once Zwift is linked to Strava. Verified directly against live Strava data on 2026-09-06 — see `ATHLETE.md`.
-- **Calendar**: see above — unresolved, ask Burke.
-- **Oura, Garmin recovery/readiness, Renpho**: not connected. Burke types them in during the daily check-in. An `OURA_TOKEN` env var would allow curling `https://api.ouraring.com/v2/usercollection/daily_readiness` directly — ask Burke if he wants this later, don't block on it.
-- **Dashboard D1** (`ironman-training-db`, binding `DB` in `worker/wrangler.toml`): the source of truth for logged sessions, check-ins, and weekly summaries once this workspace starts writing to it. Schema in `worker/schema.sql`.
+- **Calendar**: see above. Resolved and automated.
+- **Oura** (connected as of the OAuth setup on 2026-09-06): full OAuth2 connection at `im.burkeruder.ai/oauth/start` (see `worker/oura.js`). A Cloudflare cron trigger pulls readiness score and sleep hours automatically every morning (~7:30am CT) into that day's `checkins` row — no more typing Oura numbers into the daily check-in by hand. If a check-in is missing Oura data, it means the ring hasn't synced yet or the connection needs re-authorizing at `/oauth/start`.
+- **Garmin recovery/readiness**: still manual, by design. A real Garmin API integration needs a business developer relationship (not a personal token); the unofficial alternative requires handing an agent Burke's actual Garmin username/password, which was assessed and rejected as a real security tradeoff. Burke reports Garmin Training Readiness in the check-in only when it disagrees with Oura.
+- **Renpho** (weight): still manual, by design — no clean public API exists. Reported weekly (Monday weigh-in) in the check-in.
+- **Dashboard D1** (`ironman-training-db`, binding `DB` in `worker/wrangler.toml`): the source of truth for logged sessions, check-ins, weekly summaries, and the Oura token (`oura_tokens` table). Schema in `worker/schema.sql`.

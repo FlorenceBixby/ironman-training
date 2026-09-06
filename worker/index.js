@@ -1,6 +1,14 @@
 // ironman-training worker — serves the Road to 140.6 dashboard and its API.
 
 import { renderDashboard } from "./dashboard.js";
+import { renderPrivacyPage, renderTermsPage, renderOuraConnectedPage } from "./pages.js";
+import {
+  buildAuthorizeUrl,
+  exchangeCode,
+  saveTokens,
+  ouraRedirectUri,
+  fetchDailyReadinessAndSleep,
+} from "./oura.js";
 
 function json(data, init = {}) {
   return new Response(JSON.stringify(data), {
@@ -69,12 +77,109 @@ async function getDashboardData(env) {
   };
 }
 
+// Upserts today's Oura readiness/sleep into checkins without clobbering
+// other fields (garmin_readiness, weight, drinks, status, notes) that the
+// daily "today" check-in may have already written, or will write later.
+async function upsertOuraReadiness(env, date, readinessScore, sleepHours) {
+  await env.DB.prepare(
+    `INSERT INTO checkins (date, oura_readiness, sleep_hours)
+     VALUES (?, ?, ?)
+     ON CONFLICT(date) DO UPDATE SET
+       oura_readiness = COALESCE(excluded.oura_readiness, checkins.oura_readiness),
+       sleep_hours = COALESCE(excluded.sleep_hours, checkins.sleep_hours)`
+  )
+    .bind(date, readinessScore ?? null, sleepHours ?? null)
+    .run();
+}
+
+async function pullOuraForToday(env) {
+  const today = new Date().toISOString().slice(0, 10);
+  const data = await fetchDailyReadinessAndSleep(env, today);
+  if (!data) return { ok: false, reason: "not connected" };
+  if (data.readinessScore === null && data.sleepHours === null) {
+    return { ok: false, reason: "no data yet" };
+  }
+  await upsertOuraReadiness(env, today, data.readinessScore, data.sleepHours);
+  return { ok: true, ...data };
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const { pathname } = url;
 
+    // The old ironman.burkeruder.ai subdomain redirects permanently to the
+    // new one instead of serving a second live copy.
+    if (url.hostname === "ironman.burkeruder.ai") {
+      const dest = new URL(request.url);
+      dest.hostname = "im.burkeruder.ai";
+      return Response.redirect(dest.toString(), 301);
+    }
+
     try {
+      if (pathname === "/privacy") {
+        return new Response(renderPrivacyPage(), {
+          headers: { "content-type": "text/html; charset=utf-8" },
+        });
+      }
+
+      if (pathname === "/terms") {
+        return new Response(renderTermsPage(), {
+          headers: { "content-type": "text/html; charset=utf-8" },
+        });
+      }
+
+      if (pathname === "/oauth/start") {
+        if (!env.OURA_CLIENT_ID) {
+          return new Response(
+            "Oura isn't configured yet — OURA_CLIENT_ID / OURA_CLIENT_SECRET secrets are missing.",
+            { status: 500 }
+          );
+        }
+        const redirectUri = ouraRedirectUri(url);
+        const state = crypto.randomUUID();
+        const authorizeUrl = buildAuthorizeUrl(env, redirectUri, state);
+        return Response.redirect(authorizeUrl, 302);
+      }
+
+      if (pathname === "/oauth/callback") {
+        const code = url.searchParams.get("code");
+        const errorParam = url.searchParams.get("error");
+        if (errorParam) {
+          return new Response(renderOuraConnectedPage(false, `Oura returned an error: ${errorParam}`), {
+            status: 400,
+            headers: { "content-type": "text/html; charset=utf-8" },
+          });
+        }
+        if (!code) {
+          return new Response(renderOuraConnectedPage(false, "No authorization code in the callback."), {
+            status: 400,
+            headers: { "content-type": "text/html; charset=utf-8" },
+          });
+        }
+        try {
+          const redirectUri = ouraRedirectUri(url);
+          const tokens = await exchangeCode(env, code, redirectUri);
+          await saveTokens(env, tokens);
+          return new Response(
+            renderOuraConnectedPage(true, "Oura is connected. Readiness and sleep will pull in automatically each morning."),
+            { headers: { "content-type": "text/html; charset=utf-8" } }
+          );
+        } catch (err) {
+          return new Response(
+            renderOuraConnectedPage(false, String(err && err.message ? err.message : err)),
+            { status: 500, headers: { "content-type": "text/html; charset=utf-8" } }
+          );
+        }
+      }
+
+      if (pathname === "/api/oura/pull" && request.method === "POST") {
+        // Manual trigger, mainly for testing — the scheduled handler does
+        // this automatically every morning.
+        const result = await pullOuraForToday(env);
+        return json(result);
+      }
+
       if (pathname === "/" || pathname === "/index.html") {
         const data = await getDashboardData(env);
         return new Response(renderDashboard(data), {
@@ -199,6 +304,19 @@ export default {
       return new Response("Not found", { status: 404 });
     } catch (err) {
       return json({ error: String(err && err.message ? err.message : err) }, { status: 500 });
+    }
+  },
+
+  // Cron trigger (wrangler.toml [triggers]) — pulls today's Oura readiness
+  // and sleep automatically each morning, replacing the manual "tell me your
+  // Oura numbers" step in the daily check-in. No-ops quietly if Oura isn't
+  // connected yet (env has no OURA_CLIENT_ID, or the token row doesn't exist).
+  async scheduled(event, env, ctx) {
+    if (!env.OURA_CLIENT_ID) return;
+    try {
+      await pullOuraForToday(env);
+    } catch (err) {
+      console.error("Oura scheduled pull failed:", err && err.message ? err.message : err);
     }
   },
 };

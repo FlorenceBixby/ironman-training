@@ -1,6 +1,6 @@
 # The plan
 
-Written 2026-09-06, corrected 2026-09-06 (moved every session off the pre-6:30am slots the first draft used — see `ATHLETE.md`), corrected again 2026-09-06 (swim risk analysis rebuilt after Burke clarified the Waco swim split included a ~20–25 min panic response, not clean pace — see "Where the full Ironman actually gets lost" and "Open-water acclimation" below). Revisit the timeline choice by 2026-10-15 (registration deadlines).
+Written 2026-09-06, corrected 2026-09-06 (moved every session off the pre-6:30am slots the first draft used — see `ATHLETE.md`), corrected again 2026-09-06 (swim risk analysis rebuilt after Burke clarified the Waco swim split included a ~20–25 min panic response, not clean pace — see "Where the full Ironman actually gets lost" and "Open-water acclimation" below), rebuilt again 2026-09-06 (the weekly template and adjustment rules replaced with an adaptive weekly-budget model, per Burke's direct ask — see "How the plan actually works now" below). Revisit the timeline choice by 2026-10-15 (registration deadlines).
 
 ## Where the full Ironman actually gets lost
 
@@ -78,37 +78,75 @@ Candidates (2027 dates not all posted yet; these are the usual slots): IRONMAN C
 
 **Coach's call: B.** Decide the specific race by Oct 15, 2026 when fall 2027 registrations open. Register for Galveston 70.3 (Apr 4, 2027) now regardless of A/B/C.
 
-## Weekly template — Rebuild block (weeks 1–10)
+## How the plan actually works now — a budget, not a schedule
 
-**Standing rule: nothing before 6:30am.** Every slot below is 6:30am or later. Kickr sessions moved off the old 5:15am/5am pre-dawn slots into late-morning or lunch; swims stay lunch/evening; the long Sunday run keeps its 6:30am floor exactly, never earlier.
+**Rewritten 2026-09-06, per Burke directly:** *"I'll do my best to complete each day's tasks, but you'll see how far I get with each day. The plan needs to be fluid based on my schedule — some days I just won't have it, some days I'll do more, but we can adapt as we go."* The version of this plan below (weekly template as a fixed Mon–Sun table, "missed = gone, never compensate") was too rigid for that. Nothing here changes the macro shape — same 10-week rebuild, same phase hour-targets, same three timelines — but the week-to-week and day-to-day mechanics are rebuilt around a **budget** Burke draws down as the week actually unfolds, not a pre-committed schedule he's expected to hit.
 
-**Open-water swap-in:** once a venue is confirmed (see "Open-water acclimation" above), one Mon or Fri pool swim below becomes an open-water session every 1–2 weeks, starting week 3–4 of the rebuild or earlier if the venue is found sooner.
+**What this means concretely:**
+- There is no more Monday=swim/Tuesday=bike table. Each week has a **target budget** (total hours + rough per-sport minimums, see below). The daily "today" protocol looks at what's left in that budget, what today's calendar and readiness actually allow, and hands back **one session sized to the gap that exists that day** — every day, freshly computed, never read off a pre-written weekly grid.
+- A skipped or shortened day is **absorbed**, not penalized and not automatically rescheduled to a specific later day. See "What happens to a missed or shortened session" below for exactly how.
+- A day where Burke does more than expected is **banked into this week's math**, not used to justify bigger asks in future weeks. See "Doing more than planned" below.
+- No guilt framing anywhere in this. A quiet week is data, not a failure — the weekly summary reports it plainly and the plan adapts.
 
-| Day | Session | Slot | Notes |
-|---|---|---|---|
-| Mon | Swim 30–40 min | lunch or 8pm | Technique. 8×50 easy, 4×100, 200 continuous. Grow the continuous piece weekly. |
-| Tue | Kickr 45–60 min | 6:30–8am (after kids are up) or lunch | Zwift, Z2, last 10 min at "comfortably hard". Ride in Zwift so power lands in Strava. |
-| Wed | Run 40–50 min | lunch (existing habit) or 6:30–8am | Easy. HR cap 150. Walk if it drifts over 155. Out of midday heat until October. |
-| Thu | Kickr 45 min + strength 20 min | 6:30–8am or lunch | 3×5 min tempo inside the ride. Strength: squat, hinge, single-leg, core, band work. |
-| Fri | Swim 30–40 min | lunch or 8pm | Same as Mon; add 25 m of continuous per session. |
-| Sat | Long ride 75 → 180 min + 10–15 min brick jog | late morning (8–10am) | Kickr, in Zwift. Z2. +15 min per week. Fuel it (60 g carbs/hr). |
-| Sun | Long run 50 → 90 min, or rest | 6:30am | Easy. Run/walk is allowed and encouraged. Every third week: rest. |
+### The weekly budget (replaces the fixed table)
 
-Weeks 1–3 hours: 5.5 / 6 / 6.5. Week 4 down-week: 4.5. Weeks 5–7: 7 / 7.5 / 8. Week 8 down: 5.5. Weeks 9–10: 8 / 8.5.
-Tests in weeks 2–3: 20-min FTP on Zwift, 30-min run LTHR, 400 m swim TT. Re-test every 8 weeks. All tests at 6:30am or later, on a green day only.
+Per phase-week, the budget is: a **total hour target** (unchanged from the numbers already in this plan — e.g. rebuild weeks 1–3: 5.5 / 6 / 6.5 hrs) plus **rough per-sport minimums** so nothing gets silently crowded out by whichever sport is easiest that week:
 
-## Daily adjustment rules (used by the "today" protocol)
+| Sport | Rebuild-block minimum per week | Notes |
+|---|---|---|
+| Swim | 2 sessions (or 1 once open-water swaps in every 1–2 wks) | Technique/endurance-building; see "Open-water acclimation" above for the progression. |
+| Bike | 2 sessions incl. the long ride | Long ride is the week's single highest-value session — see absorption rules below. |
+| Run | 2 sessions incl. the long run | Long run is the week's other highest-value session. |
+| Strength | 1 session, 20 min | Lowest priority to protect if the week gets tight — drop before swim/bike/run. |
 
-Inputs: Oura readiness, sleep hours, Garmin Training Readiness, calendar, and how yesterday's session went.
+These are minimums, not a schedule — which day each happens on, and in what order, is decided daily by the "today" protocol, not pre-assigned.
 
-1. **Green** (Oura ≥ 75 and sleep ≥ 6.5 h and Garmin ≥ 50): do the planned session.
-2. **Yellow** (Oura 60–74, or sleep 5–6.5 h, or Garmin 25–49): keep the session but drop intensity to Z2 and cap at 45 min. Never do a test on a yellow day.
-3. **Red** (Oura < 60, or sleep < 5 h, or Garmin < 25, or RHR ≥ 7 bpm above 30-day baseline, or sick kid all night): 20-min walk or full rest. Do not "make it up" tomorrow; the week just gets smaller.
-4. **Calendar collision**: shift the session to another open slot the same day (late morning, lunch, evening) before moving it to another day. Swap days freely, but keep at least one rest day and never stack long ride + long run on consecutive days in the rebuild block. Never solve a collision by moving a session earlier than 6:30am.
-5. **Missed a session**: it is gone. Weekly hours never rise more than 10% over the previous week to compensate.
-6. **Two yellow/red days in a row**: cut the remaining week by a third and flag it in the weekly summary.
-7. **Heat**: any run starting above 85°F is Z1 only, or moved to a cooler slot (still 6:30am or later).
-8. **Alcohol the night before**: automatically treat the day as yellow at best, regardless of the Oura score.
+### The session menu (what "today" picks from)
+
+Each sport has an ordered menu that naturally builds week over week — this is what changes as the block progresses, not the day it happens on:
+- **Swim**: technique set (8×50 easy, 4×100, growing continuous piece) → open-water session once a venue exists (see progression above).
+- **Bike**: Z2 endurance ride (45–60 min, building) → long ride (75→180 min in the rebuild block, +15 min/wk when it actually happens) → tempo/FTP-test day.
+- **Run**: easy Z2 run (40–50 min) → long run (50→90 min, building) → LTHR-test day.
+- **Strength**: 20 min — squat, hinge, single-leg, core, band work.
+
+### How "today" picks the session
+
+Inputs: this week's budget vs. hours/sessions logged so far (from D1 `sessions`/`checkins`), which sport minimums are still unmet with how many days left in the week, today's readiness color (below), and today's actual calendar gap.
+
+1. Apply the readiness color to set today's intensity/length ceiling (rules below).
+2. Check which sport minimum is most at risk of going unmet this week (fewest days remaining relative to sessions still needed) and lead with that sport, unless yesterday's session was the same sport and legs/shoulders need a day between.
+3. Pick the next item up on that sport's menu from where the week's log shows he left off.
+4. Fit it to today's actual open calendar slot (late morning, lunch, or evening — never before 6:30am), sized down if the slot is shorter than the ideal length rather than skipped entirely when a shorter version is still useful.
+5. Hand back **one session**: what, when, how long, intensity target, one focus cue, plus a fallback if the day blows up entirely.
+
+### What happens to a missed or shortened session
+
+Every session menu item above is tagged by value when it's skipped:
+- **Low-value-to-repeat** (a routine easy swim/run/strength session): if it's missed, it's **dropped entirely**. Not rescheduled, not owed. The week's total just gets smaller and that's fine — say so plainly in the log, no "make it up tomorrow."
+- **High-value** (the week's one long ride or long run, or a scheduled fitness test): first try to **compress** it into a shorter version later in the same week if an open slot still exists (e.g. a 90-min long run that didn't happen Sunday becomes a 50-min version Tuesday lunch if that's what's left). If no slot remains in the week, it's **rolled forward inside that same week's absorption only** — never pinned to a specific day next week, and never stacked on top of next week's own long session. The multi-week progression (e.g. "long ride reaches 5 hrs by mid-March") just absorbs a one-week pause; the macro timelines already carry slack for exactly this (see timeline B's ~78% odds, which already assumes real-world weeks like this happen).
+- **Two consecutive weeks missing the same high-value session** (e.g. two Saturdays with no long ride) gets flagged explicitly in the weekly summary as a trend worth a real conversation — not silently auto-fixed, not silently ignored either.
+
+### Doing more than planned
+
+If Burke does more volume or intensity than the day's session called for:
+- Log it exactly as it happened (`status: modified`, actual summary in the notes) — never round it down to match what was "planned."
+- It **shrinks what's left to ask for later in that same week** — if Wednesday's run ran long, Thursday's ask gets sized down or made optional rather than stacking full effort on top of extra volume already banked.
+- It does **not** pull forward future weeks' targets. The long-session progression still caps at +10% over the previous week's *actual* completed hours (not planned) — one big day doesn't license a bigger jump the week after. Overreaching now to "get ahead" is exactly the injury-risk pattern this cap exists to prevent.
+
+### Readiness colors (unchanged mechanism, now feeds the picker above instead of a fixed slot)
+
+1. **Green** (Oura ≥ 75 and sleep ≥ 6.5 h and Garmin ≥ 50): today's session runs at full planned intensity/length.
+2. **Yellow** (Oura 60–74, or sleep 5–6.5 h, or Garmin 25–49): today's session still happens but intensity caps at Z2 and length caps at 45 min. Never run a fitness test on a yellow day.
+3. **Red** (Oura < 60, or sleep < 5 h, or Garmin < 25, or RHR ≥ 7 bpm above 30-day baseline, or sick kid all night): 20-min walk or full rest — this counts as the day's low-value session and is dropped per the rules above, not made up.
+4. **Calendar collision**: shift to another open slot the same day (late morning, lunch, evening) before moving it to another day. Never solve a collision by moving a session earlier than 6:30am.
+5. **Two yellow/red days in a row**: re-run the weekly-budget math with the days actually left rather than pretending the rest of the week is untouched, and flag it in the weekly summary.
+6. **Heat**: any run starting above 85°F is Z1 only, or moved to a cooler slot (still 6:30am or later).
+7. **Alcohol the night before**: automatically treat the day as yellow at best, regardless of the Oura score.
+
+### Phase-level hour targets (unchanged — the budget each week draws from)
+
+Weeks 1–3: 5.5 / 6 / 6.5 hrs. Week 4 down-week: 4.5. Weeks 5–7: 7 / 7.5 / 8. Week 8 down: 5.5. Weeks 9–10: 8 / 8.5.
+Tests (20-min FTP on Zwift, 30-min run LTHR, 400 m swim TT) get slotted in by the picker above sometime in weeks 2–3, only on a green day. Re-test every 8 weeks.
 
 ## Alcohol protocol
 
@@ -119,13 +157,15 @@ Inputs: Oura readiness, sleep hours, Garmin Training Readiness, calendar, and ho
 
 ## Weekly log template
 
+The "Planned" column fills in day-by-day as the daily "today" protocol runs — not written all at once on Sunday. Start each new week's file with the budget line and an empty table; the week's own log then shows exactly how the budget actually got spent as it unfolds.
+
 ```
 # Week YYYY-Www (Mon date – Sun date)
-Phase: Rebuild wk N. Target hrs: X. Alcohol cap: N.
+Phase: Rebuild wk N. Budget: X hrs (swim ≥2 sessions, bike ≥2 incl. long ride, run ≥2 incl. long run, strength ≥1). Alcohol cap: N.
 
-| Day | Planned | Readiness (Oura / sleep / Garmin) | Done (from Strava) | Notes |
+| Day | Planned (set the morning of, from the weekly budget) | Readiness (Oura / sleep / Garmin) | Done (from Strava) | Notes |
 |---|---|---|---|---|
 | Mon | | | | |
 ...
-Weekly: hrs ___ / swim m ___ / bike hrs ___ / run mi ___ / dry days ___ / weight ___
+Weekly: hrs ___ / swim m ___ / bike hrs ___ / run mi ___ / dry days ___ / weight ___ — budget met? ___ (a short "no" with why is fine, not a failure)
 ```
