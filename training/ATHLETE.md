@@ -45,7 +45,7 @@ Tests to schedule in weeks 2–3 of the rebuild (all at or after 6:30am):
 - Heat: Aug–Sep runs at midday are the reason HR is so high. Runs move out of 11am–4pm until October — late morning after 6:30am, lunch, or evening (after ~7:30pm once it's cooled some).
 - **Training windows, in order of realism**: (1) late morning, 6:30–8am once kids are up and settled — the Kickr lives here now, not at 5am; (2) lunch, 12–1pm on days without a 12:00 meeting — this is already a standing habit (3mi runs, 4x/week); (3) evening, after 8pm bedtime. Nothing before 6:30am, full stop.
 - Neighborhood pool hours/season are unverified. If it closes for winter, need a plan B (YMCA Hays, Buda rec center).
-- **Open-water access: not yet established.** The lap pool covers swim fitness but not open-water acclimation (panic response, sighting, race-start crowding). Needs a real lake/reservoir or an organized open-water swim group near Buda/Austin. This is an open logistics item for Burke to research and confirm — do not assume a venue appears on its own. See `PLAN.md`'s open-water acclimation section.
+- **Open-water access, resolved 2026-09-06 (from Burke directly):** no lake close to home, but three real options — Barton Springs, an Austin open-water swim meetup group, and a buddy on a kayak or a rented boat on an Austin lake. Sequenced in `PLAN.md`'s open-water acclimation section (Barton Springs first, meetup group next, kayak/boat for the longer continuous efforts). Still open: actually booking the first Barton Springs session and finding/joining a specific meetup group — the venue *type* question is resolved, the scheduling isn't.
 
 ## Data plumbing status
 | Source | Status | Path |
