@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS checkins (
 
 CREATE TABLE IF NOT EXISTS milestones (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  label TEXT NOT NULL,
+  label TEXT NOT NULL UNIQUE,
   target_date TEXT,
   status TEXT NOT NULL DEFAULT 'pending', -- pending | done
   notes TEXT,
@@ -63,21 +63,21 @@ CREATE TABLE IF NOT EXISTS oura_tokens (
   updated_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
--- Seed: week 1 (rebuild)
+-- Seed: week 1 (rebuild). Idempotent on week_id, safe to re-run. The old
+-- per-day session seed rows were removed 2026-09-06 when the plan moved to
+-- the adaptive weekly-budget model (see PLAN.md) — sessions get added
+-- day-by-day by the "today" protocol now, not pre-seeded for the whole
+-- week. `sessions` intentionally has no unique constraint (a day can
+-- legitimately log more than one entry), so re-running this file will
+-- never silently re-add stale pre-planned sessions.
 INSERT OR IGNORE INTO weeks (week_id, start_date, end_date, phase, target_hours, alcohol_cap, notes)
 VALUES ('2026-W37', '2026-09-07', '2026-09-13', 'Rebuild wk 1', 5.5, 3,
   'Labor Day Monday. Every session moved to 6:30am or later — see PLAN.md.');
 
-INSERT OR IGNORE INTO sessions (date, week_id, sport, planned_desc, planned_time, planned_minutes, status)
-VALUES
-  ('2026-09-07', '2026-W37', 'swim', '8x50 easy, 4x100, 200 continuous, 4x50 easy (~1100m). First swim since May.', 'any time (holiday)', 30, 'planned'),
-  ('2026-09-08', '2026-W37', 'bike', 'Kickr 45 min Z2 on Zwift. Last 10 min comfortably hard.', '6:30-8am or lunch', 45, 'planned'),
-  ('2026-09-09', '2026-W37', 'run', 'Easy 40 min. HR cap 150. Walk breaks fine.', 'lunch or 6:30-8am', 40, 'planned'),
-  ('2026-09-10', '2026-W37', 'bike', 'Kickr 45 min w/ 3x5min tempo, then 20 min strength.', '6:30-8am or lunch', 65, 'planned'),
-  ('2026-09-11', '2026-W37', 'swim', 'Same set as Mon, continuous piece to 250m.', 'lunch', 30, 'planned'),
-  ('2026-09-12', '2026-W37', 'bike', 'Long ride 75 min Z2 + 10-15 min brick jog. First brick.', 'late morning (8-10am)', 90, 'planned'),
-  ('2026-09-13', '2026-W37', 'run', 'Long run 50 min easy, or rest if the week was rough.', '6:30am', 50, 'planned');
-
+-- `label` is UNIQUE, so this stays idempotent across repeated runs (unlike
+-- before 2026-09-06, when repeated schema.sql runs silently duplicated
+-- every row — that duplication was found and cleaned up live in D1 this
+-- session).
 INSERT OR IGNORE INTO milestones (label, target_date, sort_order) VALUES
   ('Register 70.3 Galveston (Apr 4, 2027)', NULL, 1),
   ('Find/confirm an open-water venue for acclimation swims (lake, reservoir, or OW swim group)', '2026-09-27', 2),
