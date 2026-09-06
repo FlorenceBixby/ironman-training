@@ -15,3 +15,7 @@ This repo (`ironman-training`) is the dedicated home for Burke's full-Ironman co
 2. Whether to add an `OURA_TOKEN` env var so readiness pulls automatically instead of being typed in each morning.
 3. Confirm the subdomain choice (`ironman.burkeruder.ai`) or pick a different one.
 4. Decide the specific fall-2027 full (Chattanooga vs. Florida vs. Arizona) by 2026-10-15, and register for 70.3 Galveston (Apr 4, 2027) now.
+5. **New, 2026-09-06:** find/confirm a real open-water venue (lake, reservoir, or organized open-water swim group) near Buda/Austin for acclimation swims — the lap pool doesn't cover this, and it's now the actual swim risk (see `PLAN.md`'s "Open-water acclimation" section). Milestone target date 2026-09-27 in D1 is a placeholder guess, not confirmed with Burke.
+
+## History (continued)
+- 2026-09-06, later same day: corrected the swim risk analysis after Burke clarified the Waco 70.3 swim split (1:01:45) included a ~20-25 min panic response to his first-ever open water exposure, not clean pace. Backed the panic segment out of the verified totals and got a controlled pace that projects to ~1:38-2:05 for a full 2.4mi swim — comfortably under the 2:20:00 cutoff, versus the prior "at/over cutoff" conclusion built on the raw split. Rewrote `ATHLETE.md` and `PLAN.md`, added an open-water acclimation training component, revised the three-timeline odds, added a D1 milestone for finding an open-water venue, and redeployed the live dashboard. See the git commit for full numbers.
