@@ -1,21 +1,55 @@
 # The plan
 
-Written 2026-09-06, corrected 2026-09-06 (moved every session off the pre-6:30am slots the first draft used — see `ATHLETE.md`). Revisit the timeline choice by 2026-10-15 (registration deadlines).
+Written 2026-09-06, corrected 2026-09-06 (moved every session off the pre-6:30am slots the first draft used — see `ATHLETE.md`), corrected again 2026-09-06 (swim risk analysis rebuilt after Burke clarified the Waco swim split included a ~20–25 min panic response, not clean pace — see "Where the full Ironman actually gets lost" and "Open-water acclimation" below). Revisit the timeline choice by 2026-10-15 (registration deadlines).
 
 ## Where the full Ironman actually gets lost
 
-Scaling the 2024 Waco 70.3 paces to 140.6:
+**Correction, 2026-09-06 (from Burke directly):** the swim analysis below was rebuilt after Burke described what actually happened in the Waco 70.3 swim. The original version of this plan scaled the raw 1:01:45 split straight to full distance and concluded the swim alone was likely to miss the cutoff — "swim is the whole project." That was wrong: it treated a one-time panic response as demonstrated pace.
+
+**What actually happened in the water (Waco, his first time ever in open water, verbatim from Burke):** his heart rate spiked the moment he entered and for roughly the first 20–25 minutes he "couldn't swim" — covering only ~0.3–0.4 mi of the 1931 m (1.2 mi) course before he settled down. Once his heart rate came under control he swam the rest at what he recalls as ~30–40 min/mi.
+
+**Backing out the panic segment**, using the two hard verified numbers (official time 1:01:45; real course distance 1931 m, per `ATHLETE.md`):
+- Panic segment: ~20–25 min covering ~0.3–0.4 mi → an effective pace during the freeze of roughly 50–83 min/mi (~3:07–5:10 /100 m) — slow, but not literally motionless, consistent with "couldn't really swim."
+- Remaining, controlled segment: ~36.75–41.75 min covering the remaining ~0.8–0.9 mi → **a controlled open-water pace of roughly 41–52 min/mi (2:32–3:15 /100 m), central estimate ~46 min/mi (~2:52 /100 m).**
+- Note on precision: this backed-out figure is somewhat slower than Burke's own recollection of "30–40 min/mi" for the calm stretch — that's likely an optimistic in-the-moment impression rather than a measured split. The backed-out number is used here because it's anchored to two verified hard facts (official total time, real course distance) instead of a felt-pace memory.
+
+**Scaled to a full swim (2.4 mi / 3862 m), assuming the panic doesn't recur:**
+- At controlled pace: **1:38–2:05, central estimate ~1:51.**
+- IRONMAN's full-distance swim cutoff is **2:20:00** from the individual start — confirmed current as of this correction (standard across IRONMAN-branded full events; the prior plan had this number right, it just scaled the wrong pace against it).
+- Even the slow end of the honest range (2:05) carries ~15 minutes of margin under cutoff. The central estimate (~1:51) carries closer to 30.
+- Sensitivity check: even if a shorter residual freeze happens on race day and never fully goes away — say 10 minutes instead of 20–25 — the projection still lands around 1:42–2:08. Still under cutoff.
+
+**Compare to the old analysis:** it scaled the full raw split (~3:12–3:46 /100 m, panic included) straight to 140.6 and got ~2:15–2:25 — at or past the cutoff. That single number was the entire basis for calling the swim "the #1 risk" and "the whole project." Once the panic minutes are correctly separated out as a one-time psychological response to a novel environment — not a fitness or pace ceiling — the real risk picture is meaningfully better than that.
+
+**This is a correction, not a victory lap.** A controlled pace of ~2:32–3:15/100 m is still slow by competitive age-group standards (strong full-distance swimmers run 1:30–2:00/100 m), and "controlled, no panic" is a projection, not a demonstrated fact — he has never actually swum 2.4 continuous open-water miles, panic or no panic. The real risk going forward is narrower and more specific than before: **will the panic response recur on race day, and can he build the continuous endurance to swim 2.4 miles at all** (his longest swim since 2024 is a single 550 m pool session in May). Both are trainable, and neither responds to pool-only training the way raw pace does — see "Open-water acclimation" below.
 
 | Leg | 2024 70.3 pace | Scaled to 140.6 | Cutoff | Verdict |
 |---|---|---|---|---|
-| Swim 2.4 mi (3862 m) | ~3:30 /100 m | ~2:15–2:25 | 2:20 | Over or at the cutoff. Swim is the #1 risk. |
-| Bike 112 mi | ~14 mph (RAGBRAI) | ~8:00 | ~10:30 elapsed from start | OK only if the swim is fixed. |
-| Run 26.2 mi | ~14 /mi | ~6:10 | 17:00 total | Survivable with walk breaks. |
+| Swim 2.4 mi (3862 m) | Raw split ~3:12–3:46/100 m (panic included); controlled pace once calm ~2:32–3:15/100 m | Raw-scaled (old, wrong): ~2:15–2:25. Controlled-pace (corrected): ~1:38–2:05, central ~1:51 | 2:20:00 | **No longer the #1 risk on a pace basis.** Real risk is panic recurrence + never having swum the full continuous distance — a training-approach problem, not a speed problem. |
+| Bike 112 mi | ~14 mph (RAGBRAI) | ~8:00 | ~10:30 elapsed from start | OK with a real build — unaffected by this correction. |
+| Run 26.2 mi | ~14 /mi | ~6:10 | 17:00 total | Survivable with walk breaks — unaffected by this correction. |
 
 Target race-day numbers that give a safe finish (~15:30–16:00 total):
-- Swim at 2:45–3:00 /100 m → 1:45–1:55. Requires 2–3 swims a week, every week, from now.
+- Swim: no pace increase needed — his controlled pace (~2:32–3:15/100 m) already lands in a safe range against cutoff. The actual target is **panic-free + 2.4 mi of continuous open-water endurance**, not raw speed. Build via 2–3 pool swims a week (endurance base, technique) plus regular open-water acclimation sessions once a venue is found (below).
 - Bike at 15–16 mph steady → 7:00–7:30. Needs FTP ~180–200 W and 4–5 hr rides done twice.
 - Run/walk at 13:00–13:30 /mi → 5:40–5:55. Needs 16–18 mi long runs done twice.
+
+## Open-water acclimation — the real swim fix
+
+A ~20–25 minute panic/freeze response on first open-water exposure — heart rate spiking, unable to swim until mentally settled — is a well-documented, common trigger in triathlon: sighting difficulty, losing the pool wall as a depth/orientation reference, cold shock, crowding, or simply the sensory novelty of open water with no visible bottom. **It is not primarily a fitness problem, and pool swims alone will not fix it.** The plan already has two pool swims a week for fitness and technique; this section is the piece that was missing.
+
+**Logistics gap — needs Burke, flagged here rather than assumed away:** no open-water venue is confirmed yet. The neighborhood lap pool has no open-water equivalent. Options to research near Buda/Austin: a calm lake or reservoir, or an organized open-water swim group (these often run supervised sessions, which is also useful later for practicing crowding/contact). None of this is confirmed — it needs to actually get found and locked in, not assumed to happen on its own. See the milestone below and `HANDOFF.md`.
+
+**Progression, once a venue exists** (folds into the Rebuild and Base blocks — roughly one open-water session every 1–2 weeks, swapped in for a Mon or Fri pool swim, same lunch/evening slot logic as the rest of the plan, never before 6:30am):
+1. **Calm and low-stakes first.** Shallow water, easy pace, short duration (10–15 min). The only goal is being in open water without stress — no sighting drills, no pace targets yet.
+2. **Add sighting.** Look up every 6–10 strokes to spot a fixed landmark, still easy pace, building continuous duration toward 20–30 min.
+3. **Panic/settling toolkit — teach this before the first open-water session, not after:** box breathing (4-count in, 4-count hold, 4-count out, 4-count hold) if heart rate spikes; a short mantra to repeat if the mind starts to freeze; and explicit permission to roll briefly onto his back to breathe and reorient if overwhelmed, instead of treading water in panic.
+4. **Simulate race stress later** (Base block onward, once 1–3 feel routine): a bit of chop or current if available, swimming near or lightly bumping another person, eventually a group open-water swim or a practice mass-start if one exists locally.
+5. **Before race day:** at least one continuous 2.4 mi (or close to it) open-water swim, panic-free — ideally more than once.
+
+**Open-water swap-in in the weekly template:** once a venue is confirmed, one Mon or Fri pool swim becomes an open-water session every 1–2 weeks, starting week 3–4 of the rebuild (earlier if the venue is found sooner).
+
+**Milestone: find and confirm an open-water venue by 2026-09-27** (three weeks out — suggested, confirm/adjust with Burke). This blocks the whole acclimation track, so it needs to happen early in the rebuild block, not get discovered as a gap in week 8.
 
 ## The three timelines
 
@@ -28,25 +62,27 @@ Common start for all three: **Rebuild block, Sep 7 – Nov 15, 2026 (10 weeks)**
 - Rebuild (10 wk) → Base (8 wk, Nov–Jan, 8–10 hrs) → Build (8 wk, Jan–Mar, 11–14 hrs) → Peak (4 wk, 14–15 hrs) → Taper (2 wk).
 - Long rides reach 5 hrs by mid-March, on the Kickr, done on Saturday late-morning/midday slots (never pre-dawn — see the 6:30am rule). Long runs reach 17 mi.
 - Needs ~90% session completion. One sick kid week in February is survivable; three are not.
-- Honest odds of a healthy finish given the family/work load: about 40%. High chance of arriving undertrained at the swim.
+- Honest odds of a healthy finish given the family/work load: **about 50%** (revised up from 40% on 2026-09-06 — the swim was flagged as the main extra risk stacked on top of the tight timeline, and that risk is now understood to be about panic recurrence and untested endurance, not raw pace; still a real risk, but not "arriving undertrained at the swim" the way the old analysis implied). The dominant risk on this timeline hasn't changed: ramping bike and run volume from a near-zero base in 32 weeks around three kids and two jobs.
 - 70.3 Galveston (Apr 4) is too close to use as a tune-up; skip it.
 
 ### B. Recommended: a fall 2027 full (~55–62 weeks)
-Candidates (2027 dates not all posted yet; these are the usual slots): IRONMAN Chattanooga (late Sep, downstream swim, big help for a slow swimmer), IRONMAN Florida (Panama City Beach, early Nov, flat, ocean swim), IRONMAN Arizona (Tempe, mid Nov, flat, lake swim, cool). Arizona is the classic first-timer pick; Chattanooga is the best pick if the swim stays the weak link.
+Candidates (2027 dates not all posted yet; these are the usual slots): IRONMAN Chattanooga (late Sep, downstream swim), IRONMAN Florida (Panama City Beach, early Nov, flat, ocean swim), IRONMAN Arizona (Tempe, mid Nov, flat, lake swim, cool). Arizona is the classic first-timer pick; Chattanooga still offers useful extra swim margin while open-water acclimation is new and race-untested (not because the swim is "the weak link" anymore — see the corrected swim analysis above).
 - Rebuild (10 wk) → Base through winter (8–10 hrs) → **IRONMAN 70.3 Texas, Galveston, April 4, 2027** as a full-dress rehearsal → Build May–Aug (11–13 hrs, summer heat = train early morning/late evening, never midday) → Peak Sep–Oct (13–14 hrs) → Taper.
 - Two half-distance checkpoints (Galveston Apr 2027; optionally 70.3 Waco early Oct 2027 only if the full is in Nov).
-- Odds of a healthy finish: about 75%. Enough slack for real life.
+- Odds of a healthy finish: **about 78%** (revised up slightly from 75% on 2026-09-06 — same swim-risk correction as timeline A, with more schedule slack here to absorb any hiccup).
 
 ### C. Dragging feet: IRONMAN Texas, April 2028 (~84 weeks)
 - 2027 becomes the year of halves: Galveston Apr 4, Waco early Oct. Full build starts Nov 2027.
 - Peak weeks never exceed 12 hrs. Most compatible with an 18-month-old becoming a 3-year-old.
-- Odds: about 85%. Cost: motivation drift over 20 months. Mitigate by racing the two halves properly.
+- Odds: about 85% (unaffected by the 2026-09-06 swim correction — this timeline already had ample margin). Cost: motivation drift over 20 months. Mitigate by racing the two halves properly.
 
 **Coach's call: B.** Decide the specific race by Oct 15, 2026 when fall 2027 registrations open. Register for Galveston 70.3 (Apr 4, 2027) now regardless of A/B/C.
 
 ## Weekly template — Rebuild block (weeks 1–10)
 
 **Standing rule: nothing before 6:30am.** Every slot below is 6:30am or later. Kickr sessions moved off the old 5:15am/5am pre-dawn slots into late-morning or lunch; swims stay lunch/evening; the long Sunday run keeps its 6:30am floor exactly, never earlier.
+
+**Open-water swap-in:** once a venue is confirmed (see "Open-water acclimation" above), one Mon or Fri pool swim below becomes an open-water session every 1–2 weeks, starting week 3–4 of the rebuild or earlier if the venue is found sooner.
 
 | Day | Session | Slot | Notes |
 |---|---|---|---|

@@ -69,7 +69,8 @@ VALUES
 
 INSERT OR IGNORE INTO milestones (label, target_date, sort_order) VALUES
   ('Register 70.3 Galveston (Apr 4, 2027)', NULL, 1),
-  ('Rebuild block complete', '2026-11-15', 2),
-  ('70.3-ready on 30 days'' notice (swim 2000m continuous, ride 3hrs, run 10mi in one week)', '2026-12-15', 3),
-  ('Decide the specific fall-2027 full (Chattanooga / Florida / Arizona)', '2026-10-15', 4),
-  ('IRONMAN 70.3 Texas, Galveston — full-dress rehearsal', '2027-04-04', 5);
+  ('Find/confirm an open-water venue for acclimation swims (lake, reservoir, or OW swim group)', '2026-09-27', 2),
+  ('Rebuild block complete', '2026-11-15', 3),
+  ('70.3-ready on 30 days'' notice (swim 2000m continuous, ride 3hrs, run 10mi in one week)', '2026-12-15', 4),
+  ('Decide the specific fall-2027 full (Chattanooga / Florida / Arizona)', '2026-10-15', 5),
+  ('IRONMAN 70.3 Texas, Galveston — full-dress rehearsal', '2027-04-04', 6);

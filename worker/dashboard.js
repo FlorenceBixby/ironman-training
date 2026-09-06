@@ -194,17 +194,18 @@ a{color:var(--accent)}
     <h2>The three timelines</h2>
     <div class="card">
       <h3><span class="sport bike"></span>A — Pushing it</h3>
-      <p>IRONMAN Texas, The Woodlands, Apr 17 2027. 32 weeks. ~14–15 peak hrs/wk. <span class="pill warn">~40% odds</span></p>
+      <p>IRONMAN Texas, The Woodlands, Apr 17 2027. 32 weeks. ~14–15 peak hrs/wk. <span class="pill warn">~50% odds</span></p>
     </div>
     <div class="card">
       <h3><span class="sport run"></span>B — Recommended</h3>
-      <p>A fall 2027 full (Chattanooga, Florida, or Arizona). 55–62 weeks. ~13–14 peak hrs/wk. <span class="pill good">~75% odds</span>. Galveston 70.3 (Apr 4, 2027) as the dress rehearsal.</p>
+      <p>A fall 2027 full (Chattanooga, Florida, or Arizona). 55–62 weeks. ~13–14 peak hrs/wk. <span class="pill good">~78% odds</span>. Galveston 70.3 (Apr 4, 2027) as the dress rehearsal.</p>
     </div>
     <div class="card">
       <h3><span class="sport swim"></span>C — Dragging feet</h3>
       <p>IRONMAN Texas, Apr 2028. 84 weeks. ~11–12 peak hrs/wk. <span class="pill good">~85% odds</span>.</p>
     </div>
     <p>All three share a 10-week rebuild (Sep 7 – Nov 15, 2026) and the same intermediate goal: <b>70.3-ready on 30 days' notice</b> by mid-December — swim 2000m continuous, ride 3hrs, run 10mi in one normal week. Decide A/B/C by Oct 15, 2026.</p>
+    <div class="callout"><p><span class="rule">Swim correction, 2026-09-06:</span> the Waco 70.3 swim split included a ~20–25 min panic response to first-ever open water, not clean pace. Backed out, his controlled pace projects to ~1:38–2:05 for the full 2.4mi swim — comfortably under the 2:20:00 cutoff, versus the ~2:15–2:25 (at/over cutoff) the raw split implied. Odds above were revised up accordingly. The real remaining risk is panic recurrence and untested endurance, not raw pace — see <code>PLAN.md</code>'s open-water acclimation section.</p></div>
   </section>
 
   <footer>

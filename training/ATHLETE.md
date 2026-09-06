@@ -1,6 +1,6 @@
 # Athlete profile — Burke Ruder
 
-Last updated: 2026-09-06. Strava numbers below were re-pulled and spot-checked live against the Strava API on this date (not just carried over from the prior session) — the Waco splits, the Sep 5 HR data, and the 133W FTP estimate all matched exactly.
+Last updated: 2026-09-06. Strava numbers below were re-pulled and spot-checked live against the Strava API on this date (not just carried over from the prior session) — the Waco splits, the Sep 5 HR data, and the 133W FTP estimate all matched exactly. **Corrected again same day:** the Waco swim analysis originally treated the raw 1:01:45 split as clean pace; Burke clarified it included a ~20–25 min panic response to his first-ever open water, and the race history below now reflects the corrected breakdown.
 
 ## Basics
 - Age 40 (just turned). Lives in Sunfield, Buda TX (Hays County). Central time.
@@ -13,7 +13,9 @@ Last updated: 2026-09-06. Strava numbers below were re-pulled and spot-checked l
 
 ## Race history
 - IRONMAN 70.3 Waco, 2024-10-06. Finished just inside the 8:30 cutoff. (Verified directly against Strava on 2026-09-06.)
-  - Swim: 1:01:45 (Strava logged 1637 m; course is 1931 m, GPS under-reads in water). Roughly 3:15–3:45 /100 m.
+  - Swim: 1:01:45 total (course 1931 m; Strava logged 1637 m, GPS under-reads in open water). **Correction, 2026-09-06 (from Burke directly): this raw split is not a clean pace effort.** It was his first time ever in open water. A panic response hit as soon as he entered — heart rate "off the charts" — and for roughly the first 20–25 minutes he essentially couldn't swim, covering only ~0.3–0.4 mi in that stretch. Once his heart rate settled he swam the rest at what he recalls as ~30–40 min/mi.
+    - Backing that out against the verified totals (1:01:45 / 1931 m): the panic segment ran at an effective ~50–83 min/mi (moving, but barely). The remaining, controlled segment — ~36.75–41.75 min covering the remaining ~0.8–0.9 mi — works out to a **controlled open-water pace of roughly 41–52 min/mi (2:32–3:15 /100 m), central estimate ~46 min/mi (~2:52 /100 m)**. That's a bit slower than his own recalled "30–40 min/mi," which was likely an optimistic in-the-moment impression; the backed-out figure is grounded in the two hard verified numbers (official time, real course distance) rather than a felt-pace memory, so the plan uses it.
+    - Net effect: the raw 1:01:45 split materially understates his real swimming ability — a third of it was a panic freeze, not swimming. See `PLAN.md` for what this changes about the full-distance swim risk (it's a real, positive change — but the swim isn't "solved," see there for why).
   - Bike: not recorded on Strava (no ride activity between the swim and run entries that day).
   - Run: 20.96 km in 2:55:16 moving / 3:09:47 elapsed. ~13:30–14:30 /mi. Avg HR 171, max 187 late in the run.
 - RAGBRAI July 2025: four consecutive days of 77 / 46 / 102 / 76 miles outdoors at 13–14 mph. Proves multi-hour bike durability exists when trained.
@@ -43,6 +45,7 @@ Tests to schedule in weeks 2–3 of the rebuild (all at or after 6:30am):
 - Heat: Aug–Sep runs at midday are the reason HR is so high. Runs move out of 11am–4pm until October — late morning after 6:30am, lunch, or evening (after ~7:30pm once it's cooled some).
 - **Training windows, in order of realism**: (1) late morning, 6:30–8am once kids are up and settled — the Kickr lives here now, not at 5am; (2) lunch, 12–1pm on days without a 12:00 meeting — this is already a standing habit (3mi runs, 4x/week); (3) evening, after 8pm bedtime. Nothing before 6:30am, full stop.
 - Neighborhood pool hours/season are unverified. If it closes for winter, need a plan B (YMCA Hays, Buda rec center).
+- **Open-water access: not yet established.** The lap pool covers swim fitness but not open-water acclimation (panic response, sighting, race-start crowding). Needs a real lake/reservoir or an organized open-water swim group near Buda/Austin. This is an open logistics item for Burke to research and confirm — do not assume a venue appears on its own. See `PLAN.md`'s open-water acclimation section.
 
 ## Data plumbing status
 | Source | Status | Path |
