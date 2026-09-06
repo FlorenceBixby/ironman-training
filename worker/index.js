@@ -9,6 +9,7 @@ import {
   ouraRedirectUri,
   fetchDailyReadinessAndSleep,
 } from "./oura.js";
+import { isAuthorizedAppleHealthRequest, upsertAppleHealthCheckin } from "./apple_health.js";
 
 function json(data, init = {}) {
   return new Response(JSON.stringify(data), {
@@ -178,6 +179,46 @@ export default {
         // this automatically every morning.
         const result = await pullOuraForToday(env);
         return json(result);
+      }
+
+      if (pathname === "/api/apple-health/pull" && request.method === "POST") {
+        // Pushed to by an iOS Shortcuts personal automation on Burke's phone
+        // (see worker/apple_health.js — Apple Health has no cloud API, so
+        // this is push not pull, despite the URL matching the /oura/pull
+        // naming convention). Body: { date, resting_heart_rate?, sleep_hours?,
+        // weight_lbs? }. date defaults to today (UTC) if omitted.
+        if (!isAuthorizedAppleHealthRequest(request, env)) {
+          return json({ ok: false, error: "unauthorized" }, { status: 401 });
+        }
+
+        let body;
+        try {
+          body = await request.json();
+        } catch {
+          return json({ ok: false, error: "invalid JSON body" }, { status: 400 });
+        }
+
+        const date = body.date || new Date().toISOString().slice(0, 10);
+        const { resting_heart_rate, sleep_hours, weight_lbs } = body;
+
+        if (
+          resting_heart_rate === undefined &&
+          sleep_hours === undefined &&
+          weight_lbs === undefined
+        ) {
+          return json(
+            { ok: false, error: "at least one of resting_heart_rate, sleep_hours, weight_lbs is required" },
+            { status: 400 }
+          );
+        }
+
+        await upsertAppleHealthCheckin(env, date, {
+          resting_heart_rate: resting_heart_rate ?? null,
+          sleep_hours: sleep_hours ?? null,
+          weight: weight_lbs ?? null,
+        });
+
+        return json({ ok: true, date, resting_heart_rate, sleep_hours, weight_lbs });
       }
 
       if (pathname === "/" || pathname === "/index.html") {

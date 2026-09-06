@@ -31,12 +31,19 @@ CREATE TABLE IF NOT EXISTS sessions (
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
+-- resting_heart_rate was added 2026-09-06 via a live `ALTER TABLE checkins
+-- ADD COLUMN resting_heart_rate REAL;` against the already-existing remote
+-- table (CREATE TABLE IF NOT EXISTS below is a no-op on a table that already
+-- exists, so it can't backfill a new column on its own — this definition is
+-- only what a *fresh* install gets). Fed by the Apple Health webhook
+-- (worker/apple_health.js), same COALESCE upsert pattern as Oura.
 CREATE TABLE IF NOT EXISTS checkins (
   date TEXT PRIMARY KEY,           -- YYYY-MM-DD
   oura_readiness INTEGER,
   sleep_hours REAL,
   garmin_readiness INTEGER,
   weight REAL,
+  resting_heart_rate REAL,
   drinks INTEGER DEFAULT 0,
   status TEXT,                     -- green | yellow | red
   notes TEXT,

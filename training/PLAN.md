@@ -144,6 +144,8 @@ If Burke does more volume or intensity than the day's session called for:
 6. **Heat**: any run starting above 85°F is Z1 only, or moved to a cooler slot (still 6:30am or later).
 7. **Alcohol the night before**: automatically treat the day as yellow at best, regardless of the Oura score.
 
+**Data sources, updated 2026-09-06:** Oura (readiness, sleep) and resting HR / sleep / weight (via the Apple Health webhook — Garmin and Renpho both sync into Apple Health on Burke's phone) now populate `checkins` automatically; see `training/README.md`'s "Data sources" for exactly how. The rule 3 RHR check above (`RHR ≥ 7 bpm above 30-day baseline`) can now actually be computed from that resting_heart_rate column instead of relying on Burke noticing and reporting it. **Garmin** in the color thresholds above still means Garmin's own Training Readiness score specifically — that one is Garmin-exclusive, never syncs anywhere, and stays the one number Burke reports by hand.
+
 ### Phase-level hour targets (unchanged — the budget each week draws from)
 
 Weeks 1–3: 5.5 / 6 / 6.5 hrs. Week 4 down-week: 4.5. Weeks 5–7: 7 / 7.5 / 8. Week 8 down: 5.5. Weeks 9–10: 8 / 8.5.
