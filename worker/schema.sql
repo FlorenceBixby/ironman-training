@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS activities (
   avg_cadence REAL,
   calories INTEGER,
   relative_effort INTEGER,
-  avg_hr INTEGER,
+  avg_hr INTEGER,                  -- coaching only: never rendered at /log or returned by /api/activities
   max_hr INTEGER,
   pace TEXT,                       -- preformatted: "10:54/mi", "13.3 mph", "2:56/100m"
   wx_temp_f INTEGER,

@@ -4,7 +4,10 @@
 //
 // Reads only the `activities` table (see schema.sql). Location is shown at
 // the city/county level Strava itself reports and nothing finer — no
-// coordinates, no polylines, no street names — by design.
+// coordinates, no polylines, no street names — by design. Heart rate
+// (avg_hr / max_hr) is stored for coaching but is never rendered here or
+// returned by /api/activities — Burke's call, 2026-09-07: useful for
+// building the plan, not public information.
 
 import { pageShell } from "./theme.js";
 
@@ -61,7 +64,6 @@ function entry(a) {
   const stats = [fmtDistance(a), fmtDuration(a.moving_s), a.pace, a.elevation_m ? `${Math.round(a.elevation_m * 3.28084)} ft up` : ""]
     .filter(Boolean)
     .join(" · ");
-  const hr = a.avg_hr ? ` · HR ${a.avg_hr}${a.max_hr ? `/${a.max_hr}` : ""}` : "";
   const where = a.indoor ? `Indoors · ${esc(a.locale || "")}` : esc(a.locale || "");
   const wx = weatherLine(a);
   return `<article class="entry" data-sport="${esc(a.sport)}">
@@ -70,7 +72,7 @@ function entry(a) {
       <span class="entry-when">${esc(fmtDay(a.date, a.start_local))}</span>
       <span class="entry-name">${esc(a.name || "")}</span>
     </div>
-    <div class="entry-stats">${esc(stats)}${hr}</div>
+    <div class="entry-stats">${esc(stats)}</div>
     <div class="entry-wx">${where}${wx ? ` · ${a.indoor ? "outside: " : ""}${esc(wx)}` : ""}</div>
     ${a.synopsis ? `<p class="entry-syn">${esc(a.synopsis)}</p>` : ""}
   </article>`;

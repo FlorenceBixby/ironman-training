@@ -261,9 +261,17 @@ export default {
         });
       }
 
+      // Public JSON mirror of /log. Heart rate columns are deliberately not
+      // selected — they stay in D1 for coaching only.
       if (pathname === "/api/activities" && request.method === "GET") {
         const activities = (
-          await env.DB.prepare("SELECT * FROM activities ORDER BY start_local DESC").all()
+          await env.DB.prepare(
+            `SELECT strava_id, start_local, date, sport, strava_type, name, locale, indoor,
+                    distance_m, moving_s, elapsed_s, elevation_m, avg_cadence, calories,
+                    relative_effort, pace, wx_temp_f, wx_feels_f, wx_humidity, wx_wind_mph,
+                    wx_precip_mm, wx_sky, synopsis
+             FROM activities ORDER BY start_local DESC`
+          ).all()
         ).results;
         return json({ count: activities.length, activities });
       }
