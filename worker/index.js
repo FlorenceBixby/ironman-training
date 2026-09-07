@@ -1,6 +1,7 @@
 // ironman-training worker — serves the Road to 140.6 dashboard and its API.
 
 import { renderDashboard } from "./dashboard.js";
+import { renderLog } from "./log.js";
 import { renderPrivacyPage, renderTermsPage, renderOuraConnectedPage } from "./pages.js";
 import {
   buildAuthorizeUrl,
@@ -18,6 +19,18 @@ function json(data, init = {}) {
   });
 }
 
+// "Today" in Burke's timezone. new Date().toISOString() is UTC, which is
+// already tomorrow after 7pm CT — wrong day for "today's orders" and for the
+// Oura upsert alike.
+function todayCT() {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Chicago",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+}
+
 function isoWeek(dateStr) {
   const d = new Date(dateStr + "T00:00:00Z");
   const target = new Date(d.valueOf());
@@ -33,7 +46,7 @@ function isoWeek(dateStr) {
 }
 
 async function getDashboardData(env) {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = todayCT();
   const currentWeekId = isoWeek(today);
 
   const week = await env.DB.prepare("SELECT * FROM weeks WHERE week_id = ?")
@@ -67,10 +80,21 @@ async function getDashboardData(env) {
 
   const dryDaysLast14 = recentCheckins.filter((c) => (c.drinks || 0) === 0).length;
 
+  // Today's prescribed session(s) may sit outside the active week's rows if
+  // we're on a fallback week, so query by date rather than filtering above.
+  const todaySessions = (
+    await env.DB.prepare("SELECT * FROM sessions WHERE date = ? ORDER BY id ASC").bind(today).all()
+  ).results;
+  const todayCheckin = recentCheckins.find((c) => c.date === today) || null;
+  const activityCount = (await env.DB.prepare("SELECT COUNT(*) as c FROM activities").first()).c;
+
   return {
     today,
     activeWeek,
     sessions,
+    todaySessions,
+    todayCheckin,
+    activityCount,
     recentCheckins,
     milestones,
     weekCount,
@@ -94,7 +118,7 @@ async function upsertOuraReadiness(env, date, readinessScore, sleepHours) {
 }
 
 async function pullOuraForToday(env) {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = todayCT();
   const data = await fetchDailyReadinessAndSleep(env, today);
   if (!data) return { ok: false, reason: "not connected" };
   if (data.readinessScore === null && data.sleepHours === null) {
@@ -226,6 +250,22 @@ export default {
         return new Response(renderDashboard(data), {
           headers: { "content-type": "text/html; charset=utf-8" },
         });
+      }
+
+      if (pathname === "/log") {
+        const activities = (
+          await env.DB.prepare("SELECT * FROM activities ORDER BY start_local DESC").all()
+        ).results;
+        return new Response(renderLog(activities), {
+          headers: { "content-type": "text/html; charset=utf-8" },
+        });
+      }
+
+      if (pathname === "/api/activities" && request.method === "GET") {
+        const activities = (
+          await env.DB.prepare("SELECT * FROM activities ORDER BY start_local DESC").all()
+        ).results;
+        return json({ count: activities.length, activities });
       }
 
       if (pathname === "/api/dashboard" && request.method === "GET") {

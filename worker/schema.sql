@@ -92,3 +92,41 @@ INSERT OR IGNORE INTO milestones (label, target_date, sort_order) VALUES
   ('70.3-ready on 30 days'' notice (swim 2000m continuous, ride 3hrs, run 10mi in one week)', '2026-12-15', 4),
   ('Decide the specific fall-2027 full (Chattanooga / Florida / Arizona)', '2026-10-15', 5),
   ('IRONMAN 70.3 Texas, Galveston — full-dress rehearsal', '2027-04-04', 6);
+
+-- Ship's log: every Strava activity since IRONMAN 70.3 Waco (2024-10-06),
+-- plus historical weather (Open-Meteo archive, hourly, at the activity's
+-- midpoint) and a short synopsis written in the site's Life Aquatic voice.
+-- Added 2026-09-07. Rendered at /log. Location is deliberately coarse —
+-- Strava's own city/county `location_summary`, never coordinates, polylines,
+-- or street-level anything. Backfilled from Strava via the coaching
+-- session's Strava connector; new rows are appended by the daily "today"
+-- protocol (see training/README.md), not by a cron.
+CREATE TABLE IF NOT EXISTS activities (
+  strava_id TEXT PRIMARY KEY,
+  start_local TEXT NOT NULL,       -- ISO local datetime, e.g. 2026-09-05T12:30:46
+  date TEXT NOT NULL,              -- YYYY-MM-DD (local)
+  sport TEXT NOT NULL,             -- run | bike | swim | strength | walk | other
+  strava_type TEXT,                -- Strava sport_type verbatim (Run, Ride, WeightTraining, ...)
+  name TEXT,                       -- Strava activity name
+  locale TEXT,                     -- coarse only: "Hays County, Texas", "Cedar Rapids, Iowa"
+  indoor INTEGER NOT NULL DEFAULT 0,
+  distance_m REAL,
+  moving_s INTEGER,
+  elapsed_s INTEGER,
+  elevation_m REAL,
+  avg_cadence REAL,
+  calories INTEGER,
+  relative_effort INTEGER,
+  avg_hr INTEGER,
+  max_hr INTEGER,
+  pace TEXT,                       -- preformatted: "10:54/mi", "13.3 mph", "2:56/100m"
+  wx_temp_f INTEGER,
+  wx_feels_f INTEGER,
+  wx_humidity INTEGER,
+  wx_wind_mph INTEGER,
+  wx_precip_mm REAL,
+  wx_sky TEXT,                     -- clear | mostly clear | partly cloudy | overcast | fog | drizzle | rain | showers | thunderstorm
+  synopsis TEXT,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS activities_date ON activities(date);

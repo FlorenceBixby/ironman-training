@@ -11,6 +11,13 @@ This repo (`ironman-training`) is the dedicated home for Burke's full-Ironman co
 - **Plan**: adaptive weekly-budget model (not a fixed Mon–Sun table) — see `PLAN.md`'s "How the plan actually works now." Swim risk was corrected 2026-09-06 (the Waco 70.3 split included a ~20-25 min first-time-open-water panic response, not clean pace — backed-out controlled pace projects comfortably under the full-distance cutoff; see `PLAN.md`).
 - **Open-water venue**: Burke has three real options — Barton Springs, an Austin open-water swim meetup group, and a buddy on a kayak/rented boat — sequenced into the acclimation plan (`PLAN.md`). Options are resolved; specific dates/group are not yet locked in.
 
+## Added 2026-09-07 (after the handoff above was written) — what the site does now
+
+- **`/log` — the ship's log** (`worker/log.js`, D1 `activities`, 248 rows back to 2024-10-01). Burke asked for "a training log that shows all of my workouts that you pull from strava" with "a wes anderson type synopsis of them. weather, distance, etc but not location exact like my streets I run." Done and live. Weather is Open-Meteo archive data at the activity's midpoint; location is Strava's county/city string only. Going forward, the daily "today" protocol appends new rows (see `training/README.md` steps 7–8) — there is no cron for this and shouldn't be, the synopsis needs a writer.
+- **`/` now shows "Orders of the day" and "This week's manifest"** straight from D1 `sessions`, plus a readiness color from today's Oura score. Burke asked "where will I see the activity I need to be doing for the day/week?" — this is the answer. **W37's seven sessions were seeded into `sessions` from `log/2026-W37.md` on 2026-09-07** (all `status: planned`) so the page wasn't empty on day one; from here, keep `sessions` current daily via `POST /api/session` or `wrangler d1 execute`, and mark rows done/modified/missed as the week unfolds. If a day's orders change from what's seeded, update the row — the site is what he reads.
+- `worker/theme.js` holds the shared palette/type/shell for both pages. `todayCT()` in `index.js` computes "today" in America/Chicago (UTC was rolling the day over at 7pm CT).
+- Today (Mon 2026-09-07): Oura readiness 73 → yellow. Seeded orders: swim 30 min easy, any time. Nothing logged yet as of this note.
+
 ## Active, unresolved thread as of right now — read this carefully before doing anything else
 
 **Apple Health / Garmin / Renpho automation has been a back-and-forth across this whole session — don't re-litigate it, just pick up where it actually is:**
