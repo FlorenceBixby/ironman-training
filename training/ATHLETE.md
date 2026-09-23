@@ -31,7 +31,7 @@ Last updated: 2026-09-06. Strava numbers below were re-pulled and spot-checked l
 - Weight: not set in Strava. Track via Renpho, report in check-ins.
 
 ## Zones (provisional, need testing)
-Live Strava zones (age-formula, `MaxHeartRateFromAge` source) are HR1 0–117, HR2 118–146, HR3 147–160, HR4 161–175, HR5 176+. Observed real max HR is 187 (Sep 5 run), so these are too conservative at the top end — treat them as a floor, not gospel, until tested. Until tested, use:
+Live Strava zones (age-formula, `MaxHeartRateFromAge` source) are HR1 0–117, HR2 118–146, HR3 147–160, HR4 161–175, HR5 176+. Observed real max HR is 194 (Sep 11 and Sep 14 runs, 2026; was 187 on the Sep 5 run), so these are too conservative at the top end — treat them as a floor, not gospel, until tested. Until tested, use:
 - Easy / Z2 run: HR 130–150. Conversational. This is where 80% of run time goes.
 - Tempo: 155–165. Threshold: 165–175. Above 175 is race-finish territory.
 - Bike: hold rides at "could talk in full sentences" until an FTP test. Strava's power zones (source `EstimatedFtpFromPower`, FTP 133W) are not trustworthy — no recent power-based ride to derive them from.

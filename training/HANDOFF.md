@@ -18,6 +18,12 @@ This repo (`ironman-training`) is the dedicated home for Burke's full-Ironman co
 - `worker/theme.js` holds the shared palette/type/shell for both pages. `todayCT()` in `index.js` computes "today" in America/Chicago (UTC was rolling the day over at 7pm CT).
 - Today (Mon 2026-09-07): Oura readiness 73 → yellow. Seeded orders: swim 30 min easy, any time. Nothing logged yet as of this note.
 
+## 2026-09-22 — catch-up from the Master Session
+
+Burke asked whether data could be pulled from Strava and Zwift. **Strava: yes, the connector works.** **Zwift: no API; only reaches us via Zwift → Strava, and that link is NOT on** — both trainer rides this month (9/10, 9/22) were watch-recorded with HR but zero power/distance. Burke has to flip it in Zwift's Connections page; nobody else can.
+
+Nothing had been posted to the site since 9/7 (no coaching session ran the daily protocol). Backfilled 13 activities (9/8–9/22) into `activities` with weather + synopses, added `weeks` rows for W38 and W39, posted W39 orders into `sessions` (Mon/Tue marked done, Wed–Sun planned), wrote `log/2026-W39.md`. HR for these is in D1 (coaching only). Pattern worth acting on: every run since 9/5 has averaged HR 165–180; the 9/14 10K hit a new observed max of **194** (ATHLETE.md still says 187 — update it). Thursday's orders are a 40-min run with a hard HR cap of 150; that's the week's test of whether an easy run is currently possible in this heat.
+
 ## Active, unresolved thread as of right now — read this carefully before doing anything else
 
 **Apple Health / Garmin / Renpho automation has been a back-and-forth across this whole session — don't re-litigate it, just pick up where it actually is:**
