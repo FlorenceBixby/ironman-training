@@ -21,3 +21,12 @@ enabled = true
 # "today" check-in.
 [triggers]
 crons = ["30 12 * * *"]
+
+# Zwift custom workouts (training/zwift/*.zwo) are bundled into the worker as
+# text modules and served at /zwift/<slug>.zwo — see worker/zwift.js.
+# ([[rules]] is a top-level array-of-tables; a bare `rules = [...]` placed
+# after [triggers] would silently become triggers.rules and be ignored.)
+[[rules]]
+type = "Text"
+globs = ["**/*.zwo"]
+fallthrough = true

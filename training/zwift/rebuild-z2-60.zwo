@@ -1,0 +1,31 @@
+<workout_file>
+  <author>Florence (Burke's coach)</author>
+  <name>Belafonte — Z2 Endurance 60</name>
+  <description>Rebuild-block midweek ride once 45 feels routine (weeks 4+). 10 min warmup, 42 min Z2 with three 1-minute high-cadence pickups, 8 min cooldown.</description>
+  <sportType>bike</sportType>
+  <tags>
+    <tag name="Road to 140.6"/>
+    <tag name="Rebuild"/>
+  </tags>
+  <workout>
+    <Warmup Duration="600" PowerLow="0.45" PowerHigh="0.62">
+      <textevent timeoffset="10" message="Ten-minute warmup. Nothing happens fast today."/>
+    </Warmup>
+    <SteadyState Duration="840" Power="0.65" Cadence="88">
+      <textevent timeoffset="10" message="42 minutes of Z2. Sit in, breathe, ride."/>
+      <textevent timeoffset="780" message="Could you hold a full conversation right now? If not, you're above Z2. Ease off."/>
+    </SteadyState>
+    <SteadyState Duration="60" Power="0.75" Cadence="95">
+      <textevent timeoffset="5" message="One-minute pickup. Still smooth. Then straight back to steady."/>
+    </SteadyState>
+    <SteadyState Duration="840" Power="0.65" Cadence="88">
+    </SteadyState>
+    <SteadyState Duration="60" Power="0.75" Cadence="95">
+      <textevent timeoffset="5" message="One-minute pickup. Still smooth. Then straight back to steady."/>
+    </SteadyState>
+    <SteadyState Duration="720" Power="0.65" Cadence="88">
+    </SteadyState>
+    <Cooldown Duration="480" PowerLow="0.55" PowerHigh="0.4">
+    </Cooldown>
+  </workout>
+</workout_file>

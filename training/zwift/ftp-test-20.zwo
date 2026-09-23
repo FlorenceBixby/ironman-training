@@ -1,0 +1,34 @@
+<workout_file>
+  <author>Florence (Burke's coach)</author>
+  <name>Belafonte — FTP Test (20 min)</name>
+  <description>The 20-minute FTP test from the plan. 10 min warmup, 3 × 1 min openers, 4 min easy, then 20 MINUTES ALL-OUT WITH ERG OFF (free ride — you choose the gear and effort), 10 min cooldown. Zwift will offer to update your FTP to 95% of the 20-min average. Accept it. Green day only; zero drinks the night before.</description>
+  <sportType>bike</sportType>
+  <tags>
+    <tag name="Road to 140.6"/>
+    <tag name="Rebuild"/>
+  </tags>
+  <workout>
+    <Warmup Duration="600" PowerLow="0.45" PowerHigh="0.65">
+      <textevent timeoffset="10" message="FTP test day. Warm up properly — ten full minutes."/>
+    </Warmup>
+    <IntervalsT Repeat="3" OnDuration="60" OnPower="0.95" OffDuration="60" OffPower="0.5" Cadence="95">
+      <textevent timeoffset="5" message="One-minute opener. Brisk, not sprinting."/>
+      <textevent timeoffset="65" message="Easy minute."/>
+    </IntervalsT>
+    <SteadyState Duration="240" Power="0.55" Cadence="85">
+      <textevent timeoffset="10" message="Four easy minutes. Drink. Breathe. Pick the gear you'll start the test in."/>
+      <textevent timeoffset="200" message="Test starts in 40 seconds. Start at an effort you think you can hold for 20 minutes, not one you hope to."/>
+    </SteadyState>
+    <FreeRide Duration="1200" FlatRoad="1">
+      <textevent timeoffset="3" message="GO. 20 minutes. ERG is off — you control it. Start conservative."/>
+      <textevent timeoffset="300" message="5 min. If you can lift it slightly, lift it. If not, hold."/>
+      <textevent timeoffset="600" message="Halfway. This should feel hard and steady, not desperate."/>
+      <textevent timeoffset="900" message="5 to go. Now you can start emptying the tank."/>
+      <textevent timeoffset="1080" message="Two minutes. Everything you have left."/>
+      <textevent timeoffset="1170" message="Thirty seconds."/>
+    </FreeRide>
+    <Cooldown Duration="600" PowerLow="0.5" PowerHigh="0.35">
+      <textevent timeoffset="5" message="Done. Accept Zwift's FTP update. Spin easy for ten. Log the number in the check-in."/>
+    </Cooldown>
+  </workout>
+</workout_file>

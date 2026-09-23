@@ -68,7 +68,7 @@ ${body}
   <footer>
     <div>im.burkeruder.ai — a Cloudflare-hosted expedition log. Part of the <a href="https://burkeruder.ai/projects">Exhibit Hall</a> at burkeruder.ai.</div>
     <div class="sign">"We're all very excited about the next expedition." — Team Zissou</div>
-    <div style="margin-top:14px">&nbsp;·&nbsp;<a href="/">Chart table</a>&nbsp;·&nbsp;<a href="/log">Ship's log</a>&nbsp;·&nbsp;<a href="/privacy">Privacy</a>&nbsp;·&nbsp;<a href="/terms">Terms</a></div>
+    <div style="margin-top:14px">&nbsp;·&nbsp;<a href="/">Chart table</a>&nbsp;·&nbsp;<a href="/log">Ship's log</a>&nbsp;·&nbsp;<a href="/zwift">Engine room</a>&nbsp;·&nbsp;<a href="/privacy">Privacy</a>&nbsp;·&nbsp;<a href="/terms">Terms</a></div>
   </footer>
 </main>
 </body>

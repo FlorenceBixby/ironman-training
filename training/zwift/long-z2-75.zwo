@@ -1,0 +1,38 @@
+<workout_file>
+  <author>Florence (Burke's coach)</author>
+  <name>Belafonte — Long Ride Z2 75</name>
+  <description>Rebuild-block long ride, 75 minutes. 10 min warmup, 55 min Z2 with a 1-minute pickup every 15, 10 min cooldown. Bottle with carbs from minute 20. Then the 10-minute jog straight off the bike if the orders say so. Conversational the whole way — the long ride is the week's most valuable session and the one that should feel the least heroic.</description>
+  <sportType>bike</sportType>
+  <tags>
+    <tag name="Road to 140.6"/>
+    <tag name="Rebuild"/>
+  </tags>
+  <workout>
+    <Warmup Duration="600" PowerLow="0.45" PowerHigh="0.62">
+      <textevent timeoffset="10" message="Long ride. 75 minutes. Start slower than feels necessary."/>
+      <textevent timeoffset="480" message="Drink now and every 15 minutes from here."/>
+    </Warmup>
+    <SteadyState Duration="840" Power="0.65" Cadence="88">
+      <textevent timeoffset="10" message="55 minutes of Z2. Settle in. Eat by minute 20, then every 30."/>
+      <textevent timeoffset="780" message="Could you hold a full conversation right now? If not, you're above Z2. Ease off."/>
+    </SteadyState>
+    <SteadyState Duration="60" Power="0.75" Cadence="95">
+      <textevent timeoffset="5" message="One-minute pickup. Still smooth. Then straight back to steady."/>
+    </SteadyState>
+    <SteadyState Duration="840" Power="0.65" Cadence="88">
+    </SteadyState>
+    <SteadyState Duration="60" Power="0.75" Cadence="95">
+      <textevent timeoffset="5" message="One-minute pickup. Still smooth. Then straight back to steady."/>
+    </SteadyState>
+    <SteadyState Duration="840" Power="0.65" Cadence="88">
+    </SteadyState>
+    <SteadyState Duration="60" Power="0.75" Cadence="95">
+      <textevent timeoffset="5" message="One-minute pickup. Still smooth. Then straight back to steady."/>
+    </SteadyState>
+    <SteadyState Duration="600" Power="0.65" Cadence="88">
+    </SteadyState>
+    <Cooldown Duration="600" PowerLow="0.55" PowerHigh="0.4">
+      <textevent timeoffset="5" message="Cooldown. Ten minutes. Then shoes on for the jog, or don't — either is on the orders."/>
+    </Cooldown>
+  </workout>
+</workout_file>

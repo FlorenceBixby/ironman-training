@@ -24,6 +24,8 @@ Burke asked whether data could be pulled from Strava and Zwift. **Strava: yes, t
 
 Nothing had been posted to the site since 9/7 (no coaching session ran the daily protocol). Backfilled 13 activities (9/8–9/22) into `activities` with weather + synopses, added `weeks` rows for W38 and W39, posted W39 orders into `sessions` (Mon/Tue marked done, Wed–Sun planned), wrote `log/2026-W39.md`. HR for these is in D1 (coaching only). Pattern worth acting on: every run since 9/5 has averaged HR 165–180; the 9/14 10K hit a new observed max of **194** (ATHLETE.md still says 187 — update it). Thursday's orders are a 40-min run with a hard HR cap of 150; that's the week's test of whether an easy run is currently possible in this heat.
 
+Later the same day: Burke asked whether the coach could **build Zwift workouts matching the protocol.** Built — 14 .zwo files in `training/zwift/` (generator `build.js`), served with install instructions at `im.burkeruder.ai/zwift`, linked from every page as "Engine room." Saturday's W39 orders now name the "Long Ride Z2 90" workout, with "FTP Test + Z2 (90 min)" offered as the alternative if he wants the test done. **Open for Burke:** install the files (needs a Mac/PC with Zwift), set Zwift FTP to 133, link Zwift → Strava. Once the FTP test is done, record the number in ATHLETE.md and the check-in; the .zwo files don't change.
+
 ## Active, unresolved thread as of right now — read this carefully before doing anything else
 
 **Apple Health / Garmin / Renpho automation has been a back-and-forth across this whole session — don't re-litigate it, just pick up where it actually is:**

@@ -1,0 +1,26 @@
+<workout_file>
+  <author>Florence (Burke's coach)</author>
+  <name>Belafonte — Z2 Endurance 45</name>
+  <description>Rebuild-block midweek ride, weeks 1–3. 8 min warmup, 25 min steady Z2, 5 min comfortably hard (upper tempo, NOT threshold), 7 min cooldown. Conversational until the last block.</description>
+  <sportType>bike</sportType>
+  <tags>
+    <tag name="Road to 140.6"/>
+    <tag name="Rebuild"/>
+  </tags>
+  <workout>
+    <Warmup Duration="480" PowerLow="0.45" PowerHigh="0.62">
+      <textevent timeoffset="10" message="Warming up. Spin easy, let the heart rate settle before any work starts."/>
+    </Warmup>
+    <SteadyState Duration="1500" Power="0.65" Cadence="88">
+      <textevent timeoffset="10" message="Steady Z2 for 25 minutes. Could talk in full sentences the entire time."/>
+      <textevent timeoffset="600" message="Check: are you breathing through your nose? If yes, this is right."/>
+      <textevent timeoffset="1200" message="Halfway. Same effort. The point is to not drift up."/>
+    </SteadyState>
+    <SteadyState Duration="300" Power="0.8" Cadence="90">
+      <textevent timeoffset="5" message="Five minutes comfortably hard. Tempo, not a test. You should still finish wanting more."/>
+    </SteadyState>
+    <Cooldown Duration="420" PowerLow="0.55" PowerHigh="0.4">
+      <textevent timeoffset="5" message="Cooldown. Done. Log it in Strava with the Zwift link on."/>
+    </Cooldown>
+  </workout>
+</workout_file>

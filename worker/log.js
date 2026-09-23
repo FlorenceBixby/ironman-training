@@ -107,7 +107,7 @@ export function renderLog(activities) {
   <p class="subhead">Every outing since Waco, as recorded by the instruments</p>
   <p class="lede">A complete record of the captain's training, pulled from Strava and annotated by the coach. Each entry notes the weather it happened in. Locations are given by county or town only — the streets he runs are his own business.</p>
 
-  <nav class="crumbs"><a href="/">← The chart table</a></nav>
+  <nav class="topnav"><a href="/">Chart table</a><a href="/log" class="here">Ship's log</a><a href="/zwift">Engine room</a></nav>
 
   <div class="facts">
     <div class="fact"><b>${t.sessions}</b><span>entries logged</span></div>

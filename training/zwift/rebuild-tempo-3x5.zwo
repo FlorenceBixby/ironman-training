@@ -1,0 +1,29 @@
+<workout_file>
+  <author>Florence (Burke's coach)</author>
+  <name>Belafonte — Tempo 3×5</name>
+  <description>Rebuild-block quality ride. 10 min warmup, 5 min Z2, then 3 × 5 min at tempo (85% FTP) with 2 min easy between, 4 min Z2, 5 min cooldown. 45 minutes. Only on a green day. Pair with 20 min strength afterward per the plan.</description>
+  <sportType>bike</sportType>
+  <tags>
+    <tag name="Road to 140.6"/>
+    <tag name="Rebuild"/>
+  </tags>
+  <workout>
+    <Warmup Duration="600" PowerLow="0.45" PowerHigh="0.65">
+      <textevent timeoffset="10" message="Warmup. Ten minutes. The intervals come after the next block."/>
+    </Warmup>
+    <SteadyState Duration="300" Power="0.65" Cadence="88">
+      <textevent timeoffset="10" message="Five minutes steady Z2 before the work."/>
+    </SteadyState>
+    <IntervalsT Repeat="3" OnDuration="300" OnPower="0.85" OffDuration="120" OffPower="0.55" Cadence="90">
+      <textevent timeoffset="5" message="Tempo. Five minutes at 85%. Hard-ish, sustainable, you could say short sentences."/>
+      <textevent timeoffset="280" message="Twenty seconds. Hold the cadence."/>
+      <textevent timeoffset="305" message="Two minutes easy. Spin it out."/>
+    </IntervalsT>
+    <SteadyState Duration="240" Power="0.6" Cadence="88">
+      <textevent timeoffset="5" message="Four minutes Z2. Let it settle."/>
+    </SteadyState>
+    <Cooldown Duration="300" PowerLow="0.55" PowerHigh="0.4">
+      <textevent timeoffset="5" message="Cooldown. Strength next if it's on the orders."/>
+    </Cooldown>
+  </workout>
+</workout_file>

@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "easy-spin-30",
+    "name": "Belafonte — Easy Spin 30",
+    "description": "Recovery spin. 30 minutes, nothing above Z1/low Z2. For yellow days, the day after a long run, or when the calendar only leaves half an hour. Counts."
+  },
+  {
+    "slug": "rebuild-z2-45",
+    "name": "Belafonte — Z2 Endurance 45",
+    "description": "Rebuild-block midweek ride, weeks 1–3. 8 min warmup, 25 min steady Z2, 5 min comfortably hard (upper tempo, NOT threshold), 7 min cooldown. Conversational until the last block."
+  },
+  {
+    "slug": "rebuild-z2-60",
+    "name": "Belafonte — Z2 Endurance 60",
+    "description": "Rebuild-block midweek ride once 45 feels routine (weeks 4+). 10 min warmup, 42 min Z2 with three 1-minute high-cadence pickups, 8 min cooldown."
+  },
+  {
+    "slug": "rebuild-tempo-3x5",
+    "name": "Belafonte — Tempo 3×5",
+    "description": "Rebuild-block quality ride. 10 min warmup, 5 min Z2, then 3 × 5 min at tempo (85% FTP) with 2 min easy between, 4 min Z2, 5 min cooldown. 45 minutes. Only on a green day. Pair with 20 min strength afterward per the plan."
+  },
+  {
+    "slug": "ftp-test-20",
+    "name": "Belafonte — FTP Test (20 min)",
+    "description": "The 20-minute FTP test from the plan. 10 min warmup, 3 × 1 min openers, 4 min easy, then 20 MINUTES ALL-OUT WITH ERG OFF (free ride — you choose the gear and effort), 10 min cooldown. Zwift will offer to update your FTP to 95% of the 20-min average. Accept it. Green day only; zero drinks the night before."
+  },
+  {
+    "slug": "ftp-test-plus-z2-90",
+    "name": "Belafonte — FTP Test + Z2 (90 min)",
+    "description": "For a Saturday when the long ride slot is the only green-day slot left for the test. The full 20-min FTP test (ERG off during the 20), then 35 min of easy Z2 to still bank the long-ride time, 10 min cooldown. 90 minutes total. Do the test first while fresh; everything after it is genuinely easy."
+  },
+  {
+    "slug": "long-z2-75",
+    "name": "Belafonte — Long Ride Z2 75",
+    "description": "Rebuild-block long ride, 75 minutes. 10 min warmup, 55 min Z2 with a 1-minute pickup every 15, 10 min cooldown. Bottle with carbs from minute 20. Then the 10-minute jog straight off the bike if the orders say so. Conversational the whole way — the long ride is the week's most valuable session and the one that should feel the least heroic."
+  },
+  {
+    "slug": "long-z2-90",
+    "name": "Belafonte — Long Ride Z2 90",
+    "description": "Rebuild-block long ride, 90 minutes. 10 min warmup, 70 min Z2 with a 1-minute pickup every 15, 10 min cooldown. Bottle with carbs from minute 20. Then the 10-minute jog straight off the bike if the orders say so. Conversational the whole way — the long ride is the week's most valuable session and the one that should feel the least heroic."
+  },
+  {
+    "slug": "long-z2-105",
+    "name": "Belafonte — Long Ride Z2 105",
+    "description": "Rebuild-block long ride, 105 minutes. 10 min warmup, 85 min Z2 with a 1-minute pickup every 15, 10 min cooldown. Bottle with carbs from minute 20. Then the 10-minute jog straight off the bike if the orders say so. Conversational the whole way — the long ride is the week's most valuable session and the one that should feel the least heroic."
+  },
+  {
+    "slug": "long-z2-120",
+    "name": "Belafonte — Long Ride Z2 120",
+    "description": "Rebuild-block long ride, 120 minutes. 10 min warmup, 100 min Z2 with a 1-minute pickup every 15, 10 min cooldown. Bottle with carbs from minute 20. Then the 10-minute jog straight off the bike if the orders say so. Conversational the whole way — the long ride is the week's most valuable session and the one that should feel the least heroic."
+  },
+  {
+    "slug": "long-z2-135",
+    "name": "Belafonte — Long Ride Z2 135",
+    "description": "Rebuild-block long ride, 135 minutes. 10 min warmup, 115 min Z2 with a 1-minute pickup every 15, 10 min cooldown. Bottle with carbs from minute 20. Then the 10-minute jog straight off the bike if the orders say so. Conversational the whole way — the long ride is the week's most valuable session and the one that should feel the least heroic."
+  },
+  {
+    "slug": "long-z2-150",
+    "name": "Belafonte — Long Ride Z2 150",
+    "description": "Rebuild-block long ride, 150 minutes. 10 min warmup, 130 min Z2 with a 1-minute pickup every 15, 10 min cooldown. Bottle with carbs from minute 20. Then the 10-minute jog straight off the bike if the orders say so. Conversational the whole way — the long ride is the week's most valuable session and the one that should feel the least heroic."
+  },
+  {
+    "slug": "long-z2-165",
+    "name": "Belafonte — Long Ride Z2 165",
+    "description": "Rebuild-block long ride, 165 minutes. 10 min warmup, 145 min Z2 with a 1-minute pickup every 15, 10 min cooldown. Bottle with carbs from minute 20. Then the 10-minute jog straight off the bike if the orders say so. Conversational the whole way — the long ride is the week's most valuable session and the one that should feel the least heroic."
+  },
+  {
+    "slug": "long-z2-180",
+    "name": "Belafonte — Long Ride Z2 180",
+    "description": "Rebuild-block long ride, 180 minutes. 10 min warmup, 160 min Z2 with a 1-minute pickup every 15, 10 min cooldown. Bottle with carbs from minute 20. Then the 10-minute jog straight off the bike if the orders say so. Conversational the whole way — the long ride is the week's most valuable session and the one that should feel the least heroic."
+  }
+]

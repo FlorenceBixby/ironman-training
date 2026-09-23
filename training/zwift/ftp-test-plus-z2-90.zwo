@@ -1,0 +1,51 @@
+<workout_file>
+  <author>Florence (Burke's coach)</author>
+  <name>Belafonte — FTP Test + Z2 (90 min)</name>
+  <description>For a Saturday when the long ride slot is the only green-day slot left for the test. The full 20-min FTP test (ERG off during the 20), then 35 min of easy Z2 to still bank the long-ride time, 10 min cooldown. 90 minutes total. Do the test first while fresh; everything after it is genuinely easy.</description>
+  <sportType>bike</sportType>
+  <tags>
+    <tag name="Road to 140.6"/>
+    <tag name="Rebuild"/>
+  </tags>
+  <workout>
+    <Warmup Duration="600" PowerLow="0.45" PowerHigh="0.65">
+      <textevent timeoffset="10" message="Long day. Test first, then an easy hour. Warm up properly."/>
+    </Warmup>
+    <IntervalsT Repeat="3" OnDuration="60" OnPower="0.95" OffDuration="60" OffPower="0.5" Cadence="95">
+      <textevent timeoffset="5" message="One-minute opener. Brisk, not sprinting."/>
+      <textevent timeoffset="65" message="Easy minute."/>
+    </IntervalsT>
+    <SteadyState Duration="240" Power="0.55" Cadence="85">
+      <textevent timeoffset="10" message="Four easy minutes. Drink. Pick your starting gear."/>
+      <textevent timeoffset="200" message="Test in 40 seconds. Start at what you can hold, not what you hope."/>
+    </SteadyState>
+    <FreeRide Duration="1200" FlatRoad="1">
+      <textevent timeoffset="3" message="GO. 20 minutes. ERG off. Start conservative."/>
+      <textevent timeoffset="300" message="5 min. Lift slightly if you can."/>
+      <textevent timeoffset="600" message="Halfway. Hard and steady."/>
+      <textevent timeoffset="900" message="5 to go. Start emptying it."/>
+      <textevent timeoffset="1080" message="Two minutes."/>
+      <textevent timeoffset="1170" message="Thirty seconds."/>
+    </FreeRide>
+    <SteadyState Duration="360" Power="0.45" Cadence="85">
+      <textevent timeoffset="5" message="Test done. Accept the FTP update when Zwift offers it. Six minutes very easy."/>
+    </SteadyState>
+    <SteadyState Duration="840" Power="0.65" Cadence="88">
+      <textevent timeoffset="10" message="35 minutes Z2. This is the long-ride part. Eat something. Talk to someone."/>
+      <textevent timeoffset="780" message="Could you hold a full conversation right now? If not, you're above Z2. Ease off."/>
+    </SteadyState>
+    <SteadyState Duration="60" Power="0.75" Cadence="95">
+      <textevent timeoffset="5" message="One-minute pickup. Still smooth. Then straight back to steady."/>
+    </SteadyState>
+    <SteadyState Duration="840" Power="0.65" Cadence="88">
+    </SteadyState>
+    <SteadyState Duration="60" Power="0.75" Cadence="95">
+      <textevent timeoffset="5" message="One-minute pickup. Still smooth. Then straight back to steady."/>
+    </SteadyState>
+    <SteadyState Duration="300" Power="0.65" Cadence="88">
+    </SteadyState>
+    <Cooldown Duration="600" PowerLow="0.55" PowerHigh="0.4">
+      <textevent timeoffset="5" message="Cooldown. Ten minutes, then the 10-minute jog if the orders say so."/>
+    </Cooldown>
+  </workout>
+</workout_file>

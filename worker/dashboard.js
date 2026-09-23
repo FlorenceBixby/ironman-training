@@ -150,7 +150,7 @@ export function renderDashboard(data) {
   <p class="subhead">A dispatch from an expedition still being provisioned</p>
   <p class="lede">Burke Ruder, forty years old, cleared IRONMAN 70.3 Waco just inside the cutoff in October 2024. He is now outfitting for the full distance — 2.4 miles of open water, 112 by bicycle, 26.2 on foot — around a full-time job, a side business, and three deckhands under seven who never signed a waiver. Standing order for the whole operation: nothing shoves off before 6:30am.</p>
 
-  <nav class="topnav"><a href="/" class="here">Chart table</a><a href="/log">Ship's log</a></nav>
+  <nav class="topnav"><a href="/" class="here">Chart table</a><a href="/log">Ship's log</a><a href="/zwift">Engine room</a></nav>
 
   <div class="facts">
     <div class="fact"><b>${esc(weekPhase)}</b><span>current heading</span></div>

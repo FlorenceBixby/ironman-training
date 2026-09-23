@@ -2,6 +2,7 @@
 
 import { renderDashboard } from "./dashboard.js";
 import { renderLog } from "./log.js";
+import { renderZwiftIndex, zwiftFile } from "./zwift.js";
 import { renderPrivacyPage, renderTermsPage, renderOuraConnectedPage } from "./pages.js";
 import {
   buildAuthorizeUrl,
@@ -250,6 +251,18 @@ export default {
         return new Response(renderDashboard(data), {
           headers: { "content-type": "text/html; charset=utf-8" },
         });
+      }
+
+      if (pathname === "/zwift" || pathname === "/zwift/") {
+        return new Response(renderZwiftIndex(), {
+          headers: { "content-type": "text/html; charset=utf-8" },
+        });
+      }
+
+      if (pathname.startsWith("/zwift/") && pathname.endsWith(".zwo")) {
+        const slug = pathname.slice("/zwift/".length, -".zwo".length);
+        const res = zwiftFile(slug);
+        return res || new Response("No such workout", { status: 404 });
       }
 
       if (pathname === "/log") {

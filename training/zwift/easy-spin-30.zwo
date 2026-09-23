@@ -1,0 +1,21 @@
+<workout_file>
+  <author>Florence (Burke's coach)</author>
+  <name>Belafonte — Easy Spin 30</name>
+  <description>Recovery spin. 30 minutes, nothing above Z1/low Z2. For yellow days, the day after a long run, or when the calendar only leaves half an hour. Counts.</description>
+  <sportType>bike</sportType>
+  <tags>
+    <tag name="Road to 140.6"/>
+    <tag name="Rebuild"/>
+  </tags>
+  <workout>
+    <Warmup Duration="300" PowerLow="0.4" PowerHigh="0.55">
+      <textevent timeoffset="5" message="Easy spin. The only goal is to finish feeling better than you started."/>
+    </Warmup>
+    <SteadyState Duration="1200" Power="0.55" Cadence="90">
+      <textevent timeoffset="300" message="High cadence, low force. Let the legs turn over."/>
+      <textevent timeoffset="900" message="Ten to go. Still easy."/>
+    </SteadyState>
+    <Cooldown Duration="300" PowerLow="0.5" PowerHigh="0.4">
+    </Cooldown>
+  </workout>
+</workout_file>
