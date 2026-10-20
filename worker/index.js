@@ -23,6 +23,59 @@ function json(data, init = {}) {
 // "Today" in Burke's timezone. new Date().toISOString() is UTC, which is
 // already tomorrow after 7pm CT — wrong day for "today's orders" and for the
 // Oura upsert alike.
+// Write auth (added 2026-10-20). Every POST that changes D1 needs a key:
+//   TRAINING_WRITE_KEY  full write (Claude coaching sessions)
+//   BELA_SCHEDULE_KEY   can ONLY set/clear a session's scheduled time
+// Sent as "Authorization: Bearer <key>". Reads stay public.
+function bearer(request) {
+  const h = request.headers.get("Authorization") || "";
+  return h.startsWith("Bearer ") ? h.slice(7).trim() : "";
+}
+function timingSafeEq(a, b) {
+  if (!a || !b || a.length !== b.length) return false;
+  let r = 0;
+  for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return r === 0;
+}
+function canWrite(request, env) {
+  return timingSafeEq(bearer(request), env.TRAINING_WRITE_KEY || "");
+}
+function canSchedule(request, env) {
+  const k = bearer(request);
+  return timingSafeEq(k, env.BELA_SCHEDULE_KEY || "") || timingSafeEq(k, env.TRAINING_WRITE_KEY || "");
+}
+const UNAUTHORIZED = () => json({ ok: false, error: "unauthorized" }, { status: 401 });
+
+// The planner never schedules before this, and Bela may not either.
+const EARLIEST = "06:30";
+const LATEST_END = "22:00";
+const toMin = (hhmm) => { const [h, m] = hhmm.split(":").map(Number); return h * 60 + m; };
+const isHHMM = (v) => typeof v === "string" && /^([01]\d|2[0-3]):[0-5]\d$/.test(v);
+
+function parseJSON(v, fallback) {
+  try { return v ? JSON.parse(v) : fallback; } catch { return fallback; }
+}
+
+// Shape one session row for the Bela plan feed.
+function planSession(s) {
+  return {
+    id: s.id,
+    date: s.date,
+    sport: s.sport,
+    summary: s.planned_desc,
+    intensity: s.intensity,
+    ideal_minutes: s.planned_minutes,
+    min_minutes: s.min_minutes ?? s.planned_minutes,
+    windows: parseJSON(s.windows, []),
+    fallback: s.fallback,
+    status: s.status,
+    scheduled: s.scheduled_start
+      ? { start: s.scheduled_start, minutes: s.scheduled_minutes, by: s.scheduled_by, at: s.scheduled_at }
+      : null,
+    unscheduled_reason: s.unscheduled_reason,
+  };
+}
+
 function todayCT() {
   return new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Chicago",
@@ -200,6 +253,7 @@ export default {
       }
 
       if (pathname === "/api/oura/pull" && request.method === "POST") {
+        if (!canWrite(request, env)) return UNAUTHORIZED();
         // Manual trigger, mainly for testing — the scheduled handler does
         // this automatically every morning.
         const result = await pullOuraForToday(env);
@@ -294,7 +348,58 @@ export default {
         return json(data);
       }
 
+      // Bela feed: what today's (or ?date=) training needs, in a shape a
+      // scheduler can fit around a calendar it can see and we can't.
+      if ((pathname === "/api/plan" || pathname === "/api/plan/today") && request.method === "GET") {
+        const date = url.searchParams.get("date") || todayCT();
+        const rows = (await env.DB.prepare("SELECT * FROM sessions WHERE date = ? ORDER BY id ASC").bind(date).all()).results;
+        const checkin = await env.DB.prepare("SELECT oura_readiness, drinks FROM checkins WHERE date = ?").bind(date).first();
+        return json({
+          date,
+          timezone: "America/Chicago",
+          rules: {
+            earliest_start: EARLIEST,
+            latest_end: LATEST_END,
+            note: "Never schedule before 06:30. Prefer the first window that fits ideal_minutes; shrink toward min_minutes before giving up. If nothing fits, POST start:null with a reason.",
+          },
+          readiness: checkin ? { oura: checkin.oura_readiness, drinks: checkin.drinks } : null,
+          sessions: rows.map(planSession),
+          schedule_endpoint: "POST /api/session/{id}/schedule  {start:'HH:MM', minutes:int} or {start:null, reason:'...'}  Authorization: Bearer <BELA_SCHEDULE_KEY>",
+        });
+      }
+
+      const sched = pathname.match(/^\/api\/session\/(\d+)\/schedule$/);
+      if (sched && request.method === "POST") {
+        if (!canSchedule(request, env)) return UNAUTHORIZED();
+        const id = Number(sched[1]);
+        const row = await env.DB.prepare("SELECT * FROM sessions WHERE id = ?").bind(id).first();
+        if (!row) return json({ ok: false, error: "no such session" }, { status: 404 });
+        const body = await request.json().catch(() => ({}));
+        const by = body.by || (timingSafeEq(bearer(request), env.BELA_SCHEDULE_KEY || "") ? "bela" : "coach");
+
+        if (body.start === null) {
+          await env.DB.prepare(
+            `UPDATE sessions SET scheduled_start = NULL, scheduled_minutes = NULL, scheduled_by = ?, scheduled_at = datetime('now'), unscheduled_reason = ? WHERE id = ?`
+          ).bind(by, String(body.reason || "no slot").slice(0, 200), id).run();
+          return json({ ok: true, id, scheduled: null });
+        }
+        if (!isHHMM(body.start)) return json({ ok: false, error: "start must be HH:MM (24h, America/Chicago) or null" }, { status: 400 });
+        const minutes = Number.isInteger(body.minutes) ? body.minutes : row.planned_minutes;
+        if (!minutes || minutes < 10 || minutes > 360) return json({ ok: false, error: "minutes must be 10-360" }, { status: 400 });
+        if (toMin(body.start) < toMin(EARLIEST)) return json({ ok: false, error: `nothing before ${EARLIEST}` }, { status: 422 });
+        if (toMin(body.start) + minutes > toMin(LATEST_END)) return json({ ok: false, error: `must end by ${LATEST_END}` }, { status: 422 });
+
+        const label = `${body.start}, ${minutes} min`;
+        await env.DB.prepare(
+          `UPDATE sessions SET scheduled_start = ?, scheduled_minutes = ?, scheduled_by = ?, scheduled_at = datetime('now'),
+             unscheduled_reason = NULL, planned_time = ? WHERE id = ?`
+        ).bind(body.start, minutes, by, label, id).run();
+        const warn = row.min_minutes && minutes < row.min_minutes ? `shorter than min_minutes (${row.min_minutes})` : undefined;
+        return json({ ok: true, id, scheduled: { start: body.start, minutes, by }, warning: warn });
+      }
+
       if (pathname === "/api/checkin" && request.method === "POST") {
+        if (!canWrite(request, env)) return UNAUTHORIZED();
         const body = await request.json();
         const {
           date,
@@ -336,6 +441,7 @@ export default {
       }
 
       if (pathname === "/api/session" && request.method === "POST") {
+        if (!canWrite(request, env)) return UNAUTHORIZED();
         const body = await request.json();
         const {
           id,
@@ -349,6 +455,10 @@ export default {
           actual_summary,
           strava_activity_id,
           notes,
+          min_minutes,
+          windows,
+          intensity,
+          fallback,
         } = body;
 
         if (id) {
@@ -364,8 +474,9 @@ export default {
         const wk = week_id || isoWeek(date);
 
         const result = await env.DB.prepare(
-          `INSERT INTO sessions (date, week_id, sport, planned_desc, planned_time, planned_minutes, status, actual_summary, strava_activity_id, notes)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+          `INSERT INTO sessions (date, week_id, sport, planned_desc, planned_time, planned_minutes, status, actual_summary, strava_activity_id, notes,
+                                 min_minutes, windows, intensity, fallback)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
         )
           .bind(
             date,
@@ -377,7 +488,11 @@ export default {
             status ?? "planned",
             actual_summary ?? null,
             strava_activity_id ?? null,
-            notes ?? null
+            notes ?? null,
+            min_minutes ?? null,
+            windows ? JSON.stringify(windows) : null,
+            intensity ?? null,
+            fallback ?? null
           )
           .run();
 
@@ -385,6 +500,7 @@ export default {
       }
 
       if (pathname === "/api/week" && request.method === "POST") {
+        if (!canWrite(request, env)) return UNAUTHORIZED();
         const body = await request.json();
         const { week_id, start_date, end_date, phase, target_hours, alcohol_cap, notes } = body;
         if (!week_id || !start_date || !end_date || !phase)

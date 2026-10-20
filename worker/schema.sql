@@ -28,7 +28,19 @@ CREATE TABLE IF NOT EXISTS sessions (
   actual_summary TEXT,
   strava_activity_id TEXT,
   notes TEXT,
-  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  -- Scheduling fields (added 2026-10-20 via live ALTER TABLE). The coach sets
+  -- the first four; Bela (work chief of staff) sets scheduled_* through
+  -- POST /api/session/:id/schedule after fitting it around the work calendar.
+  min_minutes INTEGER,             -- shortest version still worth doing
+  windows TEXT,                    -- JSON [{start:'HH:MM', end:'HH:MM', label}]
+  intensity TEXT,                  -- easy | moderate | hard
+  fallback TEXT,                   -- what to do if no window fits
+  scheduled_start TEXT,            -- HH:MM America/Chicago
+  scheduled_minutes INTEGER,
+  scheduled_by TEXT,               -- bela | coach
+  scheduled_at TEXT,
+  unscheduled_reason TEXT
 );
 
 -- resting_heart_rate was added 2026-09-06 via a live `ALTER TABLE checkins
